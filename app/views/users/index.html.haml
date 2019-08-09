@@ -1,25 +1,15 @@
-%h1 Listing users
+.ui.container
+  %h1 Listing users
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Email
-      %th Password
-      %th
-      %th
-      %th
-
-  %tbody
-    - @users.each do |user|
+  %table.ui.celled.table
+    %thead
       %tr
-        %td= user.name
-        %td= user.email
-        %td= user.password
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New User', new_user_path
+        %th id
+        %th Name
+        %th Email
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.id
+          %td= link_to user.name, user
+          %td= user.email
