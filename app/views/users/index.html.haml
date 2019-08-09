@@ -4,12 +4,10 @@
   %table.ui.celled.table
     %thead
       %tr
-        %th id
         %th Name
         %th Email
     %tbody
       - @users.each do |user|
         %tr
-          %td= user.id
           %td= link_to user.name, user
           %td= user.email

@@ -1,11 +1,12 @@
-#alert= alert
-%h1 Login
+.ui.container
+  #alert= alert
+  %h1 Login
 
-= form_tag sessions_path do |form|
-  .field
-    = label_tag :email
-    = text_field_tag :email
-  .field
-    = label_tag :password
-    = text_field_tag :password
-  = submit_tag "Login"
+  = form_tag sessions_path, {:class => 'ui form'} do |form|
+    .field
+      = label_tag :email
+      = text_field_tag :email
+    .field
+      = label_tag :password
+      = text_field_tag :password
+    = submit_tag "Login", class: 'ui green button'
