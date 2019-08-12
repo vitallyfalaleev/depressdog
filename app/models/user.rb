@@ -13,5 +13,6 @@ class User < ApplicationRecord
   validates :password, length: { in: 6..20 },
             format: { with: PASSWORD_FORMAT }
 
+
             has_many :posts, dependent: :destroy
 end

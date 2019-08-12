@@ -10,13 +10,13 @@
         %p Email can't be blank
   .field
     = f.label :password
-    = f.text_field :password, type: :password
+    = f.password_field :password
     - if @user.errors.any? && @user.errors.include?(:password)
       .ui.error.message.visible
         %p Password can't be blank and must have 6-12 characters and at least one letter
   .field
     = f.label :password_confirmation
-    = f.text_field :password_confirmation, type: :password
+    = f.password_field :password_confirmation
     - if @user.errors.any? && @user.errors.include?(:password_confirmation)
       .ui.error.message.visible
         %p Password confirmation doesn't match Password
