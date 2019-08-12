@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
 
+  def user_is_logged_in
+    if !session[:current_user]
+      redirect_to login_path
+    end
+  end
 
   def current_user
     if session[:user_id]
@@ -9,4 +14,5 @@ class ApplicationController < ActionController::Base
       @current_user = nil
     end
   end
+
 end

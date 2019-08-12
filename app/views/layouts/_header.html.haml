@@ -4,8 +4,8 @@
     = link_to 'Users', users_path, class: 'item'
     = link_to 'Posts', posts_path, class: 'item'
     .right.menu
-      = link_to 'New Post', new_post_path, class: 'ui item'
       - if current_user
+        = link_to 'New Post', new_post_path, class: 'ui item'
         = link_to current_user.name, user_path(current_user.id), class: 'item'
         = link_to 'Logout', logout_path, class: 'item'
       - else

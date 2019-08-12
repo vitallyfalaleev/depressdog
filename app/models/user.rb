@@ -5,7 +5,13 @@ class User < ApplicationRecord
 
   gravtastic
 
-  validates :email, presence: true, uniqueness: true
+  PASSWORD_FORMAT = /\A
+  (?=.*[a-z])        # Must contain a lower case character
+/x
 
-  has_many :posts, dependent: :destroy
+  validates :email, presence: true, uniqueness: true
+  validates :password, length: { in: 6..20 },
+            format: { with: PASSWORD_FORMAT }
+
+            has_many :posts, dependent: :destroy
 end
