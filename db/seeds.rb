@@ -11,13 +11,13 @@ require 'faker'
   User.create(
           name: Faker::Games::Witcher.character,
           email: Faker::Internet.unique.email,
-          password: '1'
+          password: '111111a'
   )
 end
-2.times do
+10.times do
   Post.create(
       title: Faker::ProgrammingLanguage.name,
       body: Faker::Lorem.paragraph(sentence_count: 3),
-      user_id: '1'
+      user_id:  User.all.order('RANDOM()').first.id
   )
 end

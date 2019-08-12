@@ -1,6 +1,11 @@
-.ui.container
-  - if current_user
-    %h1
-      Hello, #{current_user.name}
-  - else
-    %h1 Hello, Stranger!
+.ui.container.grid
+  .twelve.wide.column
+    - @posts.each do |p|
+      .ui.card.fluid
+        .content
+          .header= link_to p.title, post_path(p.id)
+          .description= p.body[0, 100]
+        .extra.content
+          %span.right.floated= p.created_at.to_s(:ru_datetime)
+  .four.wide.column 2
+
