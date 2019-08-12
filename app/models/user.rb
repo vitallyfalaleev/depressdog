@@ -6,4 +6,6 @@ class User < ApplicationRecord
   gravtastic
 
   validates :email, presence: true, uniqueness: true
+
+  has_many :posts
 end

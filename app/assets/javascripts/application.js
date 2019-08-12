@@ -21,4 +21,15 @@ $(document).ready(function() {
     $('.message .close').on('click', function() {
         $(this).closest('.message').transition('fade');
         });
+    $('.menu .user_menu')
+        .popup({
+            inline     : true,
+            hoverable  : true,
+            position   : 'bottom left',
+            delay: {
+                show: 300,
+                hide: 800
+            }
+        })
+    ;
 });
