@@ -14,3 +14,10 @@ require 'faker'
           password: '1'
   )
 end
+2.times do
+  Post.create(
+      title: Faker::ProgrammingLanguage.name,
+      body: Faker::Lorem.paragraph(sentence_count: 3),
+      user_id: '1'
+  )
+end
