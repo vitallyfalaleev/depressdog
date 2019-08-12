@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f246b39e-00e9-4ce5-8bb4-cee18dd12752" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../app/views/posts/index.html.haml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/views/posts/new.html.haml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/depress_blog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/depress_blog.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/assets/javascripts/application.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app/assets/javascripts/application.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/assets/javascripts/home.coffee" beforeDir="false" afterPath="$PROJECT_DIR$/../app/assets/javascripts/home.coffee" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/assets/stylesheets/application.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../app/assets/stylesheets/application.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../app/models/user.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/views/layouts/_header.html.haml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/views/layouts/_header.html.haml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config/environment.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../config/environment.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/controllers/users_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../app/controllers/users_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/views/users/show.html.haml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/views/users/show.html.haml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -34,35 +24,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../app/views/users/show.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" selection-start-line="16" selection-end-line="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../app/views/posts/show.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+            <state relative-caret-position="420">
+              <caret line="28" column="149" selection-start-line="28" selection-start-column="149" selection-end-line="28" selection-end-column="149" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../app/views/posts/_form.html.haml">
+        <entry file="file://$PROJECT_DIR$/../app/controllers/posts_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+            <state relative-caret-position="60">
+              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../config/environment.rb">
+        <entry file="file://$PROJECT_DIR$/../app/views/posts/index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="32" lean-forward="true" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+            <state relative-caret-position="30">
+              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="7" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -99,14 +80,12 @@
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/users/show.html.haml" />
         <option value="$PROJECT_DIR$/../app/assets/javascripts/application.js" />
-        <option value="$PROJECT_DIR$/../app/controllers/users_controller.rb" />
         <option value="$PROJECT_DIR$/../db/migrate/20190812080506_create_posts.rb" />
         <option value="$PROJECT_DIR$/../app/models/user.rb" />
         <option value="$PROJECT_DIR$/../app/models/post.rb" />
         <option value="$PROJECT_DIR$/../app/controllers/controllers_controller.rb" />
         <option value="$PROJECT_DIR$/../config/routes.rb" />
         <option value="$PROJECT_DIR$/../app/assets/javascripts/users.coffee" />
-        <option value="$PROJECT_DIR$/../app/controllers/posts_controller.rb" />
         <option value="$PROJECT_DIR$/../app/assets/javascripts/posts.coffee" />
         <option value="$PROJECT_DIR$/../app/views/posts/new.html.haml" />
         <option value="$PROJECT_DIR$/../app/views/posts/edit.html.haml" />
@@ -117,6 +96,9 @@
         <option value="$PROJECT_DIR$/../app/views/posts/index.html.haml" />
         <option value="$PROJECT_DIR$/../app/views/posts/show.html.haml" />
         <option value="$PROJECT_DIR$/../app/views/posts/_form.html.haml" />
+        <option value="$PROJECT_DIR$/../app/controllers/users_controller.rb" />
+        <option value="$PROJECT_DIR$/../app/views/users/show.html.haml" />
+        <option value="$PROJECT_DIR$/../app/controllers/posts_controller.rb" />
       </list>
     </option>
   </component>
@@ -341,12 +323,12 @@
       <option name="presentableId" value="Default" />
       <updated>1565341236517</updated>
       <workItem from="1565341238678" duration="20735000" />
-      <workItem from="1565594084546" duration="11584000" />
+      <workItem from="1565594084546" duration="12257000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32319000" />
+    <option name="totallyTimeSpent" value="32992000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="960" y="0" width="960" height="1048" extended-state="4" />
@@ -429,13 +411,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../app/views/users/edit.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -556,24 +531,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../app/controllers/posts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-158">
-          <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../app/assets/javascripts/posts.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../app/controllers/users_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="58" column="17" lean-forward="true" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -619,6 +580,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../app/views/posts/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../config/environment.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -626,31 +594,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../app/views/posts/index.html.haml">
+    <entry file="file://$PROJECT_DIR$/../app/controllers/users_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+        <state relative-caret-position="78">
+          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../app/views/users/show.html.haml">
+    <entry file="file://$PROJECT_DIR$/../app/views/posts/index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" selection-start-line="16" selection-end-line="17" />
+        <state relative-caret-position="30">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="7" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../app/views/users/edit.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../app/views/posts/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+        <state relative-caret-position="135">
+          <caret line="9" lean-forward="true" selection-start-line="7" selection-start-column="2" selection-end-line="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../app/views/posts/_form.html.haml">
+    <entry file="file://$PROJECT_DIR$/../app/views/users/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        <state relative-caret-position="420">
+          <caret line="28" column="149" selection-start-line="28" selection-start-column="149" selection-end-line="28" selection-end-column="149" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../app/controllers/posts_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
         </state>
       </provider>
     </entry>

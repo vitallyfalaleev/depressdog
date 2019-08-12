@@ -15,3 +15,15 @@
     = link_to 'Edit', edit_user_path(@user), class: 'ui green button'
     = link_to 'Back', users_path, class: 'ui orange button'
     = link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red button' if current_user && current_user.id == @user.id
+%br/
+.ui.container.cards.two
+  - @posts.each do |p|
+    .card.fluid
+      .content
+        .header= link_to p.title, post_path(p.id)
+        .description= p.body[0, 100]
+      .extra.content
+        %span.right.floated= p.created_at.to_s(:ru_datetime)
+        %span.left.floated
+          = link_to 'Edit', edit_post_path(p), class: 'ui green button' if current_user && current_user.id == p.user_id
+          = link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red button' if current_user && current_user.id == p.user_id
