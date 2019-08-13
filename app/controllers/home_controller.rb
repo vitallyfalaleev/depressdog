@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @posts = Post.all.order('created_at DESC').last(5)
+    @posts = Post.order('created_at DESC').first(5)
+    @users = User.order('created_at DESC').first(5)
   end
 end
