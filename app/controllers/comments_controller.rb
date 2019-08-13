@@ -10,22 +10,12 @@ class CommentsController < ApplicationController
   def edit; end
 
   def create
-    # @post = Post.where(id: :post_id)
-    #
-    # @comment = @post.comment.create(comment_params)
-    #
-    # if @comment.save
-    #   redirect_to post_path(@post)
-    # else
-    #   redirect_to post_path(@post), {notice: 'error'}
-    # end
-    @comment = Comment.new(comment_params)
-    @comment.post_id = params[:post_id]
-    @comment.user_id = current_user.id
+    @comment = current_user.comments.create(comment_params)
+
     if @comment.save
-      redirect_to post_path(@comment.post)
+      redirect_to post_path(@comment.commentable_id)
     else
-      redirect_to post_path(@comment.post), notice: 'some error'
+      redirect_to post_path(@comment.commentable_id), notice: 'some error'
     end
   end
 
@@ -42,10 +32,10 @@ class CommentsController < ApplicationController
   end
   private
   def set_comment
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
   end
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :commentable_type, :commentable_id)
   end
 end

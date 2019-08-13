@@ -15,4 +15,13 @@
     -if @post.comments.any?
       = render @post.comments
 
-    = render 'comments/form'
+    %p= @post.id
+    = form_for @comment, html: {class: 'ui reply form'} do |f|
+      = f.hidden_field :commentable_type, value: 'Post'
+      = f.hidden_field :commentable_id, value: @post.id
+
+      .field
+        = f.text_area :body, maxlength: "500"
+      .ui.buttons
+        = f.submit 'Save', class: 'ui green button'
+        = f.button 'reset',type: :reset, class: 'ui orange button'

@@ -11,8 +11,7 @@ class PostsController < ApplicationController
 
   # GET /users/:id
   def show
-    @comment = Comment.new
-    @comment.post_id = @post.id
+    @comment = @post.comments.new
   end
 
   # GET /users/new

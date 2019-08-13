@@ -1,10 +1,6 @@
 = form_for [@post, @comment], html: {class: 'ui reply form'} do |f|
-  -#- if @post.errors.any?
-  -#  #error_explanation
-  -#    %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-  -#    %ul
-  -#      - @post.errors.full_messages.each do |message|
-  -#        %li= message
+  = f.hidden_field :commentable_type, value: 'Post'
+  = f.hidden_field :commentable_id, value: @post.id
 
   .field
     = f.text_area :body, maxlength: "500"
