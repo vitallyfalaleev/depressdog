@@ -1,9 +1,18 @@
 %p#notice= notice
 .ui.container
+  .ui.piled.segment
+    -if current_user && current_user.id == @post.user_id
+      = link_to 'Edit', edit_post_path(@post),
+                        class: 'ui green button'
+      = link_to 'Destroy', @post,
+                  method: :delete,data: { confirm: 'Are you sure?' },
+                  class: 'ui red button'
+    %h3.ui.header= @post.title
+    %p= @post.body
 
+  .ui.threaded.comments
+    %h3.ui.dividing.header Comments
+    -if @post.comments.any?
+      = render @post.comments
 
-  %h3.ui.header= @post.title
-  %p= @post.body
-
-  = link_to 'Edit', edit_post_path(@post), class: 'ui green button' if current_user && current_user.id == @post.user_id
-  = link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red button' if current_user && current_user.id == @post.user_id
+    = render 'comments/form'

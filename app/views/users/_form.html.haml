@@ -21,6 +21,6 @@
     = f.password_field :password_confirmation
     - if @user.errors.any? && @user.errors.include?(:password_confirmation)
       .ui.error.message.visible
-        %p Password confirmation doesn't match Password
+        %p Password can't be blank or confirmation doesn't match Password
   .ui.buttons
     = f.submit 'Save', class: 'ui green button'

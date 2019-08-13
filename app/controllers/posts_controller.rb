@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
-  before_action :user_is_logged_in, only: [:new, :edit, :update, :destroy]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :user_is_logged_in,
+                only: [:new, :edit, :update, :destroy]
+  before_action :set_post,
+                only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   def index
@@ -8,7 +10,10 @@ class PostsController < ApplicationController
   end
 
   # GET /users/:id
-  def show; end
+  def show
+    @comment = Comment.new
+    @comment.post_id = @post.id
+  end
 
   # GET /users/new
   def new

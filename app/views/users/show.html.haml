@@ -12,11 +12,13 @@
     = @user.email
   - if current_user && current_user.id == @user.id
     .ui.buttons
-      = link_to 'Edit', edit_user_path(@user), class: 'ui green button'
-      = link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red button'
+      = link_to 'Edit', edit_user_path(@user),
+      class: 'ui green button'
+      = link_to 'Destroy', @user, method: :delete,
+      data: { confirm: 'Are you sure?' }, class: 'ui red button'
 %br/
 .ui.container.cards.two
-  - @posts.each do |p|
+  - @user.posts.each do |p|
     .card.fluid
       .content
         .header= link_to p.title, post_path(p.id)
@@ -25,5 +27,8 @@
         %span.right.floated= p.created_at.to_s(:ru_datetime)
         - if current_user && current_user.id == p.user_id
           %span.left.floated
-            = link_to 'Edit', edit_post_path(p), class: 'ui green button'
-            = link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red button'
+            = link_to 'Edit', edit_post_path(p),
+            class: 'ui green button'
+            = link_to 'Destroy', p, method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'ui red button'

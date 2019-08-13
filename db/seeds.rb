@@ -7,17 +7,24 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-10.times do
+20.times do
   User.create(
           name: Faker::Games::Witcher.character,
           email: Faker::Internet.unique.email,
           password: '111111a'
   )
 end
-10.times do
+30.times do
   Post.create(
       title: Faker::ProgrammingLanguage.name,
       body: Faker::Lorem.paragraph(sentence_count: 3),
       user_id:  User.all.order('RANDOM()').first.id
+  )
+end
+50.times do
+  Comment.create(
+      body: Faker::TvShows::DrWho.quote,
+      user_id:  User.all.order('RANDOM()').first.id,
+      post_id:  Post.all.order('RANDOM()').first.id
   )
 end

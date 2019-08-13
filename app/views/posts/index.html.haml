@@ -1,8 +1,2 @@
 .ui.container
-  - @posts.each do |p|
-    .ui.card.fluid
-      .content
-        .header= link_to p.title, post_path(p.id)
-        .description= p.body[0, 100]
-      .extra.content
-        %span.right.floated= p.created_at.to_s(:ru_datetime)
+  =render @posts
