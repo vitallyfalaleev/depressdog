@@ -7,24 +7,26 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
+10.times do
+  User.create(name: Faker::Games::Witcher.character,
+              email: Faker::Internet.unique.email,
+              password: '111111a'
+  )
+end
 20.times do
-  User.create(
-          name: Faker::Games::Witcher.character,
-          email: Faker::Internet.unique.email,
-          password: '111111a'
-  )
+  Post.create(title: Faker::ProgrammingLanguage.name,
+              body: Faker::Lorem.paragraph(sentence_count: 3),
+              user_id:  User.all.order('RANDOM()').first.id)
 end
-30.times do
-  Post.create(
-      title: Faker::ProgrammingLanguage.name,
-      body: Faker::Lorem.paragraph(sentence_count: 3),
-      user_id:  User.all.order('RANDOM()').first.id
-  )
+40.times do
+  Comment.create(body: Faker::TvShows::DrWho.quote,
+                 commentable_id: Post.all.order('RANDOM()').first.id,
+                 commentable_type: 'Post',
+                 user_id:  User.all.order('RANDOM()').first.id)
 end
-50.times do
-  Comment.create(
-      body: Faker::TvShows::DrWho.quote,
-      commentable_id: Post.all.order('RANDOM()').first.id,
-      commentable_type: 'Post'
-  )
+80.times do
+  Comment.create(body: Faker::Games::Witcher.quote,
+                 commentable_id: Comment.all.order('RANDOM()').first.id,
+                 commentable_type: 'Comment',
+                 user_id:  User.all.order('RANDOM()').first.id)
 end

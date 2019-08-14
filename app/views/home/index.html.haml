@@ -9,10 +9,10 @@
           = link_to user_path(user.id), class: 'item' do
             .content
               .header= user.name
-    .ui.piled.segment
-      .ui.header Last Comments
-      .ui.divided.middle.aligned.selection.list
-        - @comments.each do |comment|
-          = link_to post_path(comment.commentable_id), class: 'item' do
-            .content
-              .text= comment.body
+    -#.ui.piled.segment
+    -#  .ui.header Last Comments
+    -#  .ui.divided.middle.aligned.selection.list
+    -#    - @comments.each do |comment|
+    -#      = link_to post_path(comment.commentable_id), class: 'item' do
+    -#        .content
+    -#          .text= comment.body
