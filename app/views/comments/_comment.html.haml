@@ -6,6 +6,12 @@
     .text= comment.body
     .actions
       .ui.accordion
+        -if current_user && current_user.id == comment.user_id
+          = link_to 'Edit', edit_post_path(@post),
+                            class: 'reply'
+          = link_to 'Destroy', comment,
+                      method: :delete,data: { confirm: 'Are you sure?' },
+                      class: 'reply'
         %a.title.reply
           %i.dropdown.icon
           Reply
@@ -19,6 +25,7 @@
             .ui.buttons
               = f.submit 'Save', class: 'ui green button'
               = f.button 'reset',type: :reset, class: 'ui orange button'
-    .comments
-      - if comment.comments.any?
+
+    - if comment.comments.any?
+      .comments
         = render comment.comments

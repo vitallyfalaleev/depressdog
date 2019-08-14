@@ -12,10 +12,8 @@
 
   .ui.threaded.comments
     %h3.ui.dividing.header Comments
-    -if @post.comments.any?
-      = render @post.comments
-
-    = form_for @post.comments.new, html: {class: 'ui reply form'} do |f|
+    = form_for Comment.new(commentable: @post),
+    html: {class: 'ui reply form'} do |f|
       = f.hidden_field :commentable_type, value: 'Post'
       = f.hidden_field :commentable_id, value: @post.id
 
@@ -24,3 +22,6 @@
       .ui.buttons
         = f.submit 'Save', class: 'ui green button'
         = f.button 'reset',type: :reset, class: 'ui orange button'
+    -if @post.comments.any?
+      = render @post.comments.reverse
+

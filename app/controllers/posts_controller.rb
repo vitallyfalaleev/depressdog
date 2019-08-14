@@ -10,9 +10,7 @@ class PostsController < ApplicationController
   end
 
   # GET /users/:id
-  def show
-    # @comment = @post.comments.new
-  end
+  def show;  end
 
   # GET /users/new
   def new
