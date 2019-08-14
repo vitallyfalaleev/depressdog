@@ -10,17 +10,17 @@ class CommentsController < ApplicationController
   def edit; end
 
   def create
-    @comment = current_user.comments.create(comment_params)
-
+    @comment = current_user.comments.new(comment_params)
+    # render plain: @comment.inspect
     if @comment.save
-      redirect_to post_path(@comment.commentable_id)
+      redirect_to post_path(@comment.post_ident)
     else
-      redirect_to post_path(@comment.commentable_id), notice: 'some error'
+      redirect_to post_path(@comment.post_ident), notice: 'some error'
     end
   end
 
   def update
-    if @comment.update(comment_params)
+    if comment.update(comment_params)
       redirect_to post_path(post.id)
     else
       render :edit
@@ -30,6 +30,7 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to post_path(post.id)
   end
+
   private
   def set_comment
     # @post = Post.find(params[:id])

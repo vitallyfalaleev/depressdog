@@ -24,7 +24,7 @@ end
 50.times do
   Comment.create(
       body: Faker::TvShows::DrWho.quote,
-      user_id:  User.all.order('RANDOM()').first.id,
-      post_id:  Post.all.order('RANDOM()').first.id
+      commentable_id: Post.all.order('RANDOM()').first.id,
+      commentable_type: 'Post'
   )
 end

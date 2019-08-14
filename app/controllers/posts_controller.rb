@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   # GET /users/:id
   def show
-    @comment = @post.comments.new
+    # @comment = @post.comments.new
   end
 
   # GET /users/new
@@ -24,7 +24,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = current_user.posts.new(post_params)
+    @post = current_user.posts.new(comment_params)
 
     if @post.save
       redirect_to @post
@@ -35,7 +35,7 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/:id
   def update
-    if @post.update(post_params)
+    if @comment.update(comment_params)
       redirect_to @post
     else
       render :edit
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    def post_params
+    def comment_params
       params.require(:post).permit(:title, :body)
     end
 end

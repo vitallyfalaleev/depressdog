@@ -1,16 +1,24 @@
 .comment
   .content
-    -#= link_to comment.user.name, user_path(comment.id), class: 'author'
+    = link_to comment.user.name, user_path(comment.user.id), class: 'author'
     .metadata
-      -#%span.date= comment.created_at.to_s(:ru_datetime)
+      %span.date= comment.created_at.to_s(:ru_datetime)
     .text= comment.body
-    .actions= link_to 'reply'
--#    = form_for [@post, @comment], html: {class: 'ui reply form'} do |f|
--#      = f.hidden_field :commentable_type, value: 'Comment'
--#      = f.hidden_field :commentable_id, value: comment.id
--#
--#      .field
--#        = f.text_area :body, maxlength: "500"
--#      .ui.buttons
--#        = f.submit 'Save', class: 'ui green button'
--#        = f.button 'reset',type: :reset, class: 'ui orange button'
+    .actions
+      .ui.accordion
+        %a.title.reply
+          %i.dropdown.icon
+          Reply
+        .content
+          = form_for Comment.new(commentable: comment),
+            html: {class: 'ui reply form transition hidden'} do |f|
+            = f.hidden_field :commentable_type, value: 'Comment'
+            = f.hidden_field :commentable_id, value: comment.id
+            .field
+              = f.text_area :body, maxlength: "500"
+            .ui.buttons
+              = f.submit 'Save', class: 'ui green button'
+              = f.button 'reset',type: :reset, class: 'ui orange button'
+    .comments
+      - if comment.comments.any?
+        = render comment.comments
