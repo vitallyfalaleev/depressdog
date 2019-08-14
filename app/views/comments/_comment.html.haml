@@ -7,11 +7,21 @@
     .actions
       .ui.accordion
         -if current_user && current_user.id == comment.user_id
-          = link_to 'Edit', edit_post_path(@post),
-                            class: 'reply'
           = link_to 'Destroy', comment,
-                      method: :delete,data: { confirm: 'Are you sure?' },
-                      class: 'reply'
+                        method: :delete,data: { confirm: 'Are you sure?' },
+                        class: 'reply'
+          %a.title.reply
+            %i.dropdown.icon
+            Edit
+          .content
+            = form_for comment,
+              html: {class: 'ui reply form transition hidden'} do |f|
+              .field
+                = f.text_area :body, maxlength: "500"
+              .ui.buttons
+                = f.submit 'Save', class: 'ui green button'
+                = f.button 'reset',type: :reset, class: 'ui orange button'
+
         %a.title.reply
           %i.dropdown.icon
           Reply

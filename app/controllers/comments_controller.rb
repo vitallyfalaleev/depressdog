@@ -20,10 +20,10 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if comment.update(comment_params)
-      redirect_to post_path(post.id)
+    if @comment.update(comment_params)
+      redirect_to post_path(@comment.post_ident)
     else
-      render :edit
+      render post_path(@comment.post_ident)
     end
   end
   def destroy
