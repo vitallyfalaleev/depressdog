@@ -14,4 +14,12 @@
 .ui.attached.inverted.menu{
   margin-bottom: 15px;
 }
+.ui.message#notice{
+  position: absolute;
+  z-index: 100;
+  right: 0;
+  .header{
+    margin-right: 5px;
+  }
+}
 @import "semantic-ui";

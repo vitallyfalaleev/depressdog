@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to post_path(@comment.post_ident)
     else
-      redirect_to post_path(@comment.post_ident), notice: 'some error'
+      redirect_to post_path(@comment.post_ident), notice: 'Cant be blank'
     end
   end
 

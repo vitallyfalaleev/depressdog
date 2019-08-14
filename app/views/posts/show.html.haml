@@ -1,4 +1,3 @@
-%p#notice= notice
 .ui.container
   .ui.piled.segment
     -if current_user && current_user.id == @post.user_id
@@ -14,11 +13,13 @@
     %h3.ui.dividing.header Comments
     = form_for Comment.new(commentable: @post),
     html: {class: 'ui reply form'} do |f|
+      - if notice
+        .ui.visible.negative.message= notice
       = f.hidden_field :commentable_type, value: 'Post'
       = f.hidden_field :commentable_id, value: @post.id
 
       .field
-        = f.text_area :body, maxlength: "500"
+        = f.text_area :body, minlength: "3", maxlength: "500"
       .ui.buttons
         = f.submit 'Save', class: 'ui green button'
         = f.button 'reset',type: :reset, class: 'ui orange button'
