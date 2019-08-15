@@ -10,7 +10,7 @@
   %p
     %b Email:
     = @user.email
-  - if current_user && current_user.id == @user.id
+  - if owner(@user.id)
     .ui.buttons
       = link_to 'Edit', edit_user_path(@user),
       class: 'ui green button'
@@ -24,8 +24,11 @@
         .header= link_to p.title, post_path(p.id)
         .description= p.body[0, 100]
       .extra.content
+        %span.left.floated.like
+          = render 'likes/likes', type: p, method: 'Post'
         %span.right.floated= p.created_at.to_s(:ru_datetime)
-        - if current_user && current_user.id == p.user_id
+      - if owner(p.user_id)
+        .extra.content
           %span.left.floated
             = link_to 'Edit', edit_post_path(p),
             class: 'ui green button'

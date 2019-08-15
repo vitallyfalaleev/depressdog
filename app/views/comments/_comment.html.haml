@@ -4,9 +4,10 @@
     .metadata
       %span.date= comment.created_at.to_s(:ru_datetime)
     .text= comment.body
+    = render 'likes/likes', type: comment, method: 'Comment'
     .actions
       .ui.accordion
-        -if current_user && current_user.id == comment.user_id
+        -if owner(comment.user_id)
           = link_to 'Destroy', comment,
                         method: :delete,data: { confirm: 'Are you sure?' },
                         class: 'reply'

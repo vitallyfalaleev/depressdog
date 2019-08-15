@@ -1,28 +1,34 @@
 .ui.container
-  .ui.piled.segment
-    -if current_user && current_user.id == @post.user_id
-      = link_to 'Edit', edit_post_path(@post),
-                        class: 'ui green button'
-      = link_to 'Destroy', @post,
-                  method: :delete,data: { confirm: 'Are you sure?' },
-                  class: 'ui red button'
-    %h3.ui.header= @post.title
-    %p= @post.body
-
+  .ui.piled.segments
+    .ui.segment
+      -if owner(@post.user_id)
+        = link_to 'Edit', edit_post_path(@post),
+                          class: 'ui green button'
+        = link_to 'Destroy', @post,
+                    method: :delete,data: { confirm: 'Are you sure?' },
+                    class: 'ui red button'
+      %h3.ui.header= @post.title
+      %p= @post.body
+    .ui.segment
+      = render 'likes/likes', type: @post, method: 'Post'
   .ui.threaded.comments
     %h3.ui.dividing.header Comments
-    = form_for Comment.new(commentable: @post),
+    - if current_user
+      = form_for Comment.new(commentable: @post),
     html: {class: 'ui reply form'} do |f|
-      - if notice
-        .ui.visible.negative.message= notice
-      = f.hidden_field :commentable_type, value: 'Post'
-      = f.hidden_field :commentable_id, value: @post.id
+        - if notice
+          .ui.visible.negative.message= notice
+        = f.hidden_field :commentable_type, value: 'Post'
+        = f.hidden_field :commentable_id, value: @post.id
 
-      .field
-        = f.text_area :body, minlength: "3", maxlength: "500"
-      .ui.buttons
-        = f.submit 'Save', class: 'ui green button'
-        = f.button 'reset',type: :reset, class: 'ui orange button'
+        .field
+          = f.text_area :body, minlength: "3", maxlength: "500"
+        .ui.buttons
+          = f.submit 'Save', class: 'ui green button'
+          = f.button 'reset',type: :reset, class: 'ui orange button'
+    - else
+      .ui.warning.message
+        LogIn to leave a comment.
     -if @post.comments.any?
       = render @post.comments.reverse
 

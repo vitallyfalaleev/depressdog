@@ -23,3 +23,17 @@
   }
 }
 @import "semantic-ui";
+
+.likes{
+  display: block;
+  height: 20px;
+  &[type="submit"]{
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  &:hover{
+    color: #4183C4;
+    cursor: pointer;
+  }
+}

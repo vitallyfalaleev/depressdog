@@ -3,4 +3,6 @@
     .header= link_to post.title, post_path(post.id)
     .description= post.body[0, 100]
   .extra.content
+    %span.left.floated.like
+      = render 'likes/likes', type: post, method: 'Post'
     %span.right.floated= post.created_at.to_s(:ru_datetime)
