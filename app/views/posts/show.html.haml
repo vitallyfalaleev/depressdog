@@ -1,16 +1,27 @@
 .ui.container
-  .ui.piled.segments
-    .ui.segment
-      -if owner(@post.user_id)
-        = link_to 'Edit', edit_post_path(@post),
-                          class: 'ui green button'
-        = link_to 'Destroy', @post,
-                    method: :delete,data: { confirm: 'Are you sure?' },
-                    class: 'ui red button'
-      %h3.ui.header= @post.title
-      %p= @post.body
-    .ui.segment
-      = render 'likes/likes', type: @post, method: 'Post'
+  .ui.grid
+    .eleven.wide.column
+      .ui.piled.segments
+        .ui.segment
+          -if owner(@post.user_id)
+            = link_to 'Edit', edit_post_path(@post),
+                              class: 'ui green button'
+            = link_to 'Destroy', @post,
+                        method: :delete,data: { confirm: 'Are you sure?' },
+                        class: 'ui red button'
+          %h3.ui.header= @post.title
+          %p= @post.body
+        .ui.segment
+          = render 'likes/likes', type: @post, method: 'Post'
+    .five.wide.column
+      .ui.card
+        .image
+          - if @post.user.avatar?
+            = image_tag @post.user.avatar.url
+          - else
+            = image_tag @post.user.gravatar_url
+        .content
+          = link_to @post.user.name, user_path(@post.user.id), class: :header
   .ui.threaded.comments
     %h3.ui.dividing.header Comments
     - if current_user

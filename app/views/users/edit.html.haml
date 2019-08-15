@@ -1,4 +1,32 @@
 .ui.container
   %h1 Editing user
 
-  = render 'form'
+  = form_for @user, :html => {:class => 'ui form', multipart: true} do |f|
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :email
+      = f.text_field :email, type: :email
+      - if @user.errors.any? && @user.errors.include?(:email)
+        .ui.error.message.visible
+          %p Email can't be blank
+    .field
+      = f.label :avatar
+      = f.file_field :avatar
+    .field
+      = f.label :password
+      = f.password_field :password
+
+      - if @user.errors.any? && @user.errors.include?(:password)
+        .ui.error.message.visible
+          %p Password can't be blank and must have 6-12 characters and at least one letter
+
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+      - if @user.errors.any? && @user.errors.include?(:password_confirmation)
+        .ui.error.message.visible
+          %p Password can't be blank or confirmation doesn't match Password
+    .ui.buttons
+      = f.submit 'Save', class: 'ui green button'

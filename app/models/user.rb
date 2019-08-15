@@ -1,9 +1,13 @@
 class User < ApplicationRecord
   has_secure_password
 
+  mount_uploader :avatar, ImageUploader
+
   include Gravtastic
 
-  gravtastic
+  gravtastic :default => 'identicon',
+             :filetype => :jpg,
+             :size => 512
 
   PASSWORD_FORMAT = /\A(?=.*[a-z])/x
   validates :name, length: { maximum: 20 }

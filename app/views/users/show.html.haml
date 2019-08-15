@@ -1,21 +1,23 @@
 .ui.container
-  %p#notice= notice
+  .ui.grid
+    .four.wide.column
+      .ui.medium.image
+        - if @user.avatar?
+          = image_tag @user.avatar.url if @user.avatar?
+        -else
+          = image_tag @user.gravatar_url
+      - if owner(@user.id)
+        .ui.buttons.fluid
+          = link_to 'Edit', edit_user_path(@user),
+          class: 'ui green button'
+          = link_to 'Destroy', @user, method: :delete,
+          data: { confirm: 'Are you sure?' }, class: 'ui red button'
+    .twelve.wide.column
+      %h5 Name:
+      %p= @user.name
+      %h5 Email:
+      %p= @user.email
 
-  %p
-    = image_tag @user.gravatar_url
-
-  %p
-    %b Name:
-    = @user.name
-  %p
-    %b Email:
-    = @user.email
-  - if owner(@user.id)
-    .ui.buttons
-      = link_to 'Edit', edit_user_path(@user),
-      class: 'ui green button'
-      = link_to 'Destroy', @user, method: :delete,
-      data: { confirm: 'Are you sure?' }, class: 'ui red button'
 %br/
 .ui.container.cards.two
   - @user.posts.each do |p|

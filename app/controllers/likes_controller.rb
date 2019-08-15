@@ -5,17 +5,15 @@ class LikesController < ApplicationController
                 only: [:show, :edit, :update, :destroy]
   def create
     @like = current_user.likes.new(like_params)
-    @like.save
-    # redirect_to post_path(@like.like_ident)
-      # if @like.save
-    #   redirect_to post_path(@like.like_ident)
-    # else
-    #   redirect_to post_path(@like.like_ident), notice: 'Cant be blank'
-    # end
+    if @like.save
+      redirect_to post_path(@like.like_ident)
+    else
+      redirect_to post_path(@like.like_ident), notice: 'Cant be blank'
+    end
   end
   def destroy
     @like.destroy
-    # redirect_to post_path(@like.like_ident)
+    redirect_to post_path(@like.like_ident)
   end
 
   private

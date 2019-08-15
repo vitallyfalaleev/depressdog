@@ -1,4 +1,9 @@
 .comment
+  %a.avatar
+    - if comment.user.avatar?
+      = image_tag comment.user.avatar.url
+    - else
+      = image_tag comment.user.gravatar_url
   .content
     = link_to comment.user.name, user_path(comment.user.id), class: 'author'
     .metadata
