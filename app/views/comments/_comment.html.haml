@@ -4,7 +4,7 @@
     .metadata
       %span.date= comment.created_at.to_s(:ru_datetime)
     .text= comment.body
-    = render 'likes/likes', type: comment, method: 'Comment'
+    = render 'likes/likes', object: comment, method: 'Comment'
     .actions
       .ui.accordion
         -if owner(comment.user_id)

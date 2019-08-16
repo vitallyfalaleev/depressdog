@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_082104) do
+ActiveRecord::Schema.define(version: 2019_08_16_081109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_082104) do
     t.integer "likable_id"
     t.string "likable_type"
     t.bigint "user_id"
+    t.index ["user_id", "likable_type", "likable_id"], name: "index_likes_on_user_id_and_likable_type_and_likable_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 

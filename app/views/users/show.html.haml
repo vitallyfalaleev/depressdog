@@ -25,7 +25,7 @@
         .description= p.body[0, 100]
       .extra.content
         %span.left.floated.like
-          = render 'likes/likes', type: p, method: 'Post'
+          = render 'likes/likes', object: p, method: 'Post'
         %span.right.floated= p.created_at.to_s(:ru_datetime)
       - if owner(p.user_id)
         .extra.content

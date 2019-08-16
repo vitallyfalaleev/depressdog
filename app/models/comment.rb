@@ -4,7 +4,6 @@ class Comment < ApplicationRecord
   has_many :comments, :as => :commentable, dependent: :destroy
   has_many :likes, :as => :likable, dependent: :destroy
 
-
   validates :body, length: { maximum: 500 }, presence: true
 
   def post_ident
