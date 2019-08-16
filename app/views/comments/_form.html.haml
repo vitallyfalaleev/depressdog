@@ -1,9 +1,14 @@
-= form_for [@post, @comment], html: {class: 'ui reply form'} do |f|
-  = f.hidden_field :commentable_type, value: 'Post'
-  = f.hidden_field :commentable_id, value: @post.id
-
+= form_with model: Comment.new(commentable: object),
+      multipart: true,
+      html: {class: 'ui reply form'} do |f|
+  - if notice
+    .ui.visible.negative.message= notice
+  = f.hidden_field :commentable_type, value:  object.class.to_s
+  = f.hidden_field :commentable_id, value: object.id
   .field
-    = f.text_area :body, maxlength: "500"
+    = f.text_area :body, minlength: "3", maxlength: "500"
+  .field
+    = f.file_field :image
   .ui.buttons
     = f.submit 'Save', class: 'ui green button'
     = f.button 'reset',type: :reset, class: 'ui orange button'

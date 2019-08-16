@@ -1,17 +1,17 @@
 - if current_user
-  - if likes_user(type)
-    = link_to(like_url(like_id(type)), remote: true,
+  - if likes_user(object)
+    = link_to(like_url(like_id(object)), remote: true,
               method: :delete, class: 'likes') do
-      = type.likes.count
+      = object.likes.count
       %i.icon.thumbs.up.outline
   - else
-    = form_with model: Like.new(likable: type),
+    = form_for Like.new(likable: object),
             html: {class: 'ui reply form'} do |f|
-      = f.hidden_field :likable_type, value: method
-      = f.hidden_field :likable_id, value: type.id
+      = f.hidden_field :likable_type, value: object.class.to_s
+      = f.hidden_field :likable_id, value: object.id
       = f.button :submit, class: 'likes' do
-        = type.likes.count
+        = object.likes.count
         %i.icon.thumbs.up.outline
 - else
-  = type.likes.count
+  = object.likes.count
   %i.icon.thumbs.up.outline

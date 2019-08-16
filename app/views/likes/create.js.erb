@@ -1,0 +1,3 @@
+partial = "<%= j render 'likes/likes', object: @object %>"
+$(".likable[data-likable-type='<%=@object.class.to_s%>'][data-likable-id='<%=@object.id%>']")
+    .html(partial)

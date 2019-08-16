@@ -11,13 +11,14 @@
                         class: 'ui red button'
           %h3.ui.header= @post.title
           %p= @post.body
-        - if @post.images?
-          .ui.segment
-            .ui.small.images
-              - @post.images.each do |img|
-                = image_tag img.url, class: 'ui image', max: 5
-        .ui.segment
-          = render 'likes/likes', type: @post, method: 'Post'
+        -#- if @post.images?
+        -#  .ui.segment
+        -#    .ui.small.images
+        -#      - @post.images.each do |img|
+        -#        = image_tag img.url, class: 'ui image', max: 5
+        .ui.segment.likable{'data-likable-id': @post.id,
+        'data-likable-type': 'Post'}
+          = render 'likes/likes', object: @post
     .five.wide.column
       .ui.card
         .image
@@ -27,24 +28,17 @@
             = image_tag @post.user.gravatar_url
         .content
           = link_to @post.user.name, user_path(@post.user.id), class: :header
-  .ui.threaded.comments
-    %h3.ui.dividing.header Comments
-    - if current_user
-      = form_for Comment.new(commentable: @post),
-    html: {class: 'ui reply form'} do |f|
-        - if notice
-          .ui.visible.negative.message= notice
-        = f.hidden_field :commentable_type, value: 'Post'
-        = f.hidden_field :commentable_id, value: @post.id
 
-        .field
-          = f.text_area :body, minlength: "3", maxlength: "500"
-        .ui.buttons
-          = f.submit 'Save', class: 'ui green button'
-          = f.button 'reset',type: :reset, class: 'ui orange button'
-    - else
-      .ui.warning.message
-        LogIn to leave a comment.
+
+  %h3.ui.dividing.header Comments
+  - if current_user
+    = render 'comments/form', object: @post
+  - else
+    .ui.warning.message
+      LogIn to leave a comment.
+  .ui.threaded.comments{'data-likable-id': @post.id,
+        'data-likable-type': @post.class.to_s}
+
     -if @post.comments.any?
       = render @post.comments.reverse
 

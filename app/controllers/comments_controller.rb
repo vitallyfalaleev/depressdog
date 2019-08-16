@@ -10,8 +10,7 @@ class CommentsController < ApplicationController
   def edit; end
 
   def create
-    @comment = current_user.comments.new(comment_params)
-    # render plain: @comment.inspect
+    @comment = current_user.comments.create(comment_params)
     if @comment.save
       redirect_to post_path(@comment.post_ident)
     else
@@ -37,6 +36,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :commentable_type, :commentable_id)
+    params.require(:comment).permit(:body, :commentable_type,
+                                    :commentable_id, :image)
   end
 end
