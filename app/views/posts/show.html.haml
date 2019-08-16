@@ -36,8 +36,7 @@
   - else
     .ui.warning.message
       LogIn to leave a comment.
-  .ui.threaded.comments{'data-likable-id': @post.id,
-        'data-likable-type': @post.class.to_s}
+  .ui.threaded.comments
 
     -if @post.comments.any?
       = render @post.comments.reverse

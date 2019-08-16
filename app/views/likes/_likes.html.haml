@@ -5,7 +5,7 @@
       = object.likes.count
       %i.icon.thumbs.up.outline
   - else
-    = form_for Like.new(likable: object),
+    = form_with model: Like.new(likable: object),
             html: {class: 'ui reply form'} do |f|
       = f.hidden_field :likable_type, value: object.class.to_s
       = f.hidden_field :likable_id, value: object.id
