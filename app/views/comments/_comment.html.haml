@@ -9,9 +9,10 @@
     .metadata
       %span.date= comment.created_at.to_s(:ru_datetime)
     .text= comment.body
-    = render 'likes/likes', type: comment, method: 'Comment'
     .actions
       .ui.accordion
+        = render 'likes/likes', type: comment, method: 'Comment'
+
         -if owner(comment.user_id)
           = link_to 'Destroy', comment,
                         method: :delete,data: { confirm: 'Are you sure?' },
@@ -41,6 +42,6 @@
               = f.submit 'Save', class: 'ui green button'
               = f.button 'reset',type: :reset, class: 'ui orange button'
 
-    - if comment.comments.any?
-      .comments
-        = render comment.comments
+  - if comment.comments.any?
+    .comments
+      = render comment.comments

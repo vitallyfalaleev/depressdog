@@ -12,6 +12,16 @@
   .field
     = f.label :body
     = f.text_area :body, maxlength: "5000"
+  .field
+    - @post.images.each do |img|
+      = hidden_field :post, :image, multiple: true, value: img.identifier
+      = image_tag img.url, class: 'ui image tiny'
+      = f.check_box :remove_images
+
+
+  .field
+    = f.label :images
+    = f.file_field :images, multiple: true, max: 5
   .ui.buttons
     = f.submit 'Save', class: 'ui green button'
     = f.button 'reset',type: :reset, class: 'ui orange button'

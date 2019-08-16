@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = current_user.posts.new(comment_params)
+    @post = current_user.posts.new(post_params)
 
     if @post.save
       redirect_to @post
@@ -33,11 +33,13 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/:id
   def update
-    if @comment.update(comment_params)
-      redirect_to @post
-    else
-      render :edit
-    end
+    render plain: post_params.inspect
+    # remove_image_at_index(params[:id].to_i)
+    # if @post.update(post_params)
+    #   redirect_to @post
+    # else
+    #   render :edit
+    # end
   end
 
   # DELETE /posts/1
@@ -51,7 +53,7 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    def comment_params
-      params.require(:post).permit(:title, :body)
+    def post_params
+      params.require(:post).permit(:title, :body, {images: []}, :remove_images)
     end
 end

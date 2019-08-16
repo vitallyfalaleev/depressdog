@@ -1,7 +1,8 @@
 .ui.container
   %h1 Editing user
 
-  = form_for @user, :html => {:class => 'ui form', multipart: true} do |f|
+  = form_for @user,
+  :html => {:class => 'ui form', multipart: true, local: false} do |f|
     .field
       = f.label :name
       = f.text_field :name
@@ -14,6 +15,12 @@
     .field
       = f.label :avatar
       = f.file_field :avatar
+    .field
+      - if @user.avatar?
+        = image_tag @user.avatar.url, class: 'ui image small'
+        = f.label :remove_avatar
+        = f.check_box :remove_avatar
+
     .field
       = f.label :password
       = f.password_field :password

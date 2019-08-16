@@ -11,6 +11,11 @@
                         class: 'ui red button'
           %h3.ui.header= @post.title
           %p= @post.body
+        - if @post.images?
+          .ui.segment
+            .ui.small.images
+              - @post.images.each do |img|
+                = image_tag img.url, class: 'ui image', max: 5
         .ui.segment
           = render 'likes/likes', type: @post, method: 'Post'
     .five.wide.column
