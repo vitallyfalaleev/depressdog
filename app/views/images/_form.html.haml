@@ -1,0 +1,8 @@
+.ui.images
+  - type.images.each do |i|
+    .ui.small.image.delete_image
+      = image_tag i.image.url
+      = link_to post_image_path(id: i.id, post_id: i.post.id),
+        class: 'delete_icons',
+        method: :delete do
+        %i.top.left.corner.red.close.link.icon

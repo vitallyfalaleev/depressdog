@@ -30,6 +30,12 @@
               html: {class: 'ui reply form transition hidden'} do |f|
               .field
                 = f.text_area :body, maxlength: "500", minlength: 1
+                .field
+                  = image_tag comment.image.url, class: 'ui big image'
+                  = link_to image_path(comment_id: comment.id),
+                      class: 'delete_icons',
+                      method: :delete do
+                    %i.top.left.corner.red.close.link.icon
               .field
                 = f.file_field :image
               .ui.buttons

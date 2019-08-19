@@ -11,11 +11,10 @@
                         class: 'ui red button'
           %h3.ui.header= @post.title
           %p= @post.body
-        -#- if @post.images?
-        -#  .ui.segment
-        -#    .ui.small.images
-        -#      - @post.images.each do |img|
-        -#        = image_tag img.url, class: 'ui image', max: 5
+        .ui.segment
+          .ui.small.images
+            - @images.each do |img|
+              = image_tag img.image.url, class: 'ui image'
         .ui.segment.likable{'data-likable-id': @post.id,
         'data-likable-type': 'Post'}
           = render 'likes/likes', object: @post

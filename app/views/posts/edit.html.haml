@@ -1,5 +1,32 @@
 .ui.container
   %h1 Editing post
 
-  = render 'form'
+  = form_for @post, html: {class: 'ui form', multipart: true} do |f|
+    - if @post.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+        %ul
+          - @post.errors.full_messages.each do |message|
+            %li= message
+
+    .field
+      = f.label :title
+      = f.text_field :title, maxlength: "20"
+    .field
+      = f.label :body
+      = f.text_area :body, maxlength: "5000"
+
+    = render 'images/form', type: @post
+    = f.fields_for :data do |i|
+      .field
+        = i.label :data
+        = i.file_field :data,
+          multiple: true,
+          name: "data[image][]", max: 5
+
+    .ui.buttons
+      = f.submit 'Save', class: 'ui green button'
+      = f.button 'reset',type: :reset, class: 'ui orange button'
+
+
 

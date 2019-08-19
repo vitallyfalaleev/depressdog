@@ -10,11 +10,14 @@ class PostsController < ApplicationController
   end
 
   # GET /users/:id
-  def show;  end
+  def show
+    @images = @post.images.all
+  end
 
   # GET /users/new
   def new
     @post = Post.new
+    @image = @post.images.build
   end
 
   # GET /users/:id/edit
@@ -24,22 +27,49 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
 
-    if @post.save
-      redirect_to @post
-    else
-      render :new
+    respond_to do |format|
+      if @post.save && params[:images]['image'].size <= 5
+        p '*'*100
+        p params[:images]['image'].size
+        params[:images]['image'].each do |i|
+          @image = @post.images.create(image: i, post_id: @post.id,
+                                       user_id: @post.user_id)
+        end
+        format.html {redirect_to @post, notice: 'Post created!'}
+      else
+        format.html {render action: 'new'}
+      end
     end
   end
 
   # PATCH/PUT /posts/:id
   def update
-    render plain: post_params.inspect
-    # remove_image_at_index(params[:id].to_i)
-    # if @post.update(post_params)
-    #   redirect_to @post
-    # else
-    #   render :edit
-    # end
+    # render plain: post_params.inspect
+    @images = @post.images
+    respond_to do |format|
+      if params[:data].nil?
+        if  @post.update(post_params)
+          format.html {redirect_to @post, notice: 'Post updated!'}
+        else
+          format.html {redirect_to edit_post_path(@post),
+                                     notice: 'Someting wrong!'}
+        end
+      else
+        if  @post.update(post_params) && params[:data]['image'].size <= 5 &&
+            @post.images.count <=5 && @post.images.count +
+            params[:data]['image'].size <= 5
+          params[:data]['image'].each do |i|
+            @image = @post.images.create(image: i, post_id: @post.id,
+                                         user_id: @post.user_id)
+          end
+          format.html {redirect_to @post, notice: 'Post updated!'}
+        else
+          format.html {redirect_to edit_post_path(@post),
+                                   notice: 'Someting wrong!'}
+        end
+      end
+
+    end
   end
 
   # DELETE /posts/1
@@ -54,6 +84,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:title, :body, data:[:post_id, :image])
     end
 end

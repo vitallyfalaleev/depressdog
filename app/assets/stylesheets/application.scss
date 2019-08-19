@@ -37,3 +37,11 @@
     cursor: pointer;
   }
 }
+.delete_image{
+  position: relative;
+  & .delete_icons{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+}
