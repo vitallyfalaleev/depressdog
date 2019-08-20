@@ -20,7 +20,4 @@ class ApplicationController < ActionController::Base
       redirect_to user_path(current_user.id), {notice: 'Please confirm your email'}
     end
   end
-
-
-
 end
