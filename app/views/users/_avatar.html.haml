@@ -1,0 +1,6 @@
+- if type.avatar?
+  = image_tag type.avatar.url if type.avatar?
+- elsif type.image_url?
+  = image_tag type.image_url
+-else
+  = image_tag type.gravatar_url

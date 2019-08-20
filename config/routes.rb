@@ -14,5 +14,8 @@ Rails.application.routes.draw do
 
   delete 'image' => 'comments#destroy_image'
 
+  get '/auth/:provider/callback', to: 'oauth#callback', as: 'oauth_callback'
+  get '/auth/failure', to: 'oauth#failure', as: 'oauth_failure'
+
   root 'home#index'
 end

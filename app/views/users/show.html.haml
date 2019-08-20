@@ -2,10 +2,7 @@
   .ui.grid
     .four.wide.column
       .ui.medium.image
-        - if @user.avatar?
-          = image_tag @user.avatar.url if @user.avatar?
-        -else
-          = image_tag @user.gravatar_url
+        = render 'avatar', type: @user
       - if owner(@user.id)
         .ui.buttons.fluid
           = link_to 'Edit', edit_user_path(@user),

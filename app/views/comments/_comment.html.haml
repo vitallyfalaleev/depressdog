@@ -1,9 +1,6 @@
 .comment
   %a.avatar
-    - if comment.user.avatar?
-      = image_tag comment.user.avatar.url
-    - else
-      = image_tag comment.user.gravatar_url
+    = render 'users/avatar', type: comment.user
   .content
     = link_to comment.user.name, user_path(comment.user.id), class: 'author'
     .metadata
@@ -31,7 +28,7 @@
               .field
                 = f.text_area :body, maxlength: "500", minlength: 1
                 .field
-                  = image_tag comment.image.url, class: 'ui big image'
+                  = image_tag comment.image.url, class: 'ui big image' if comment.image?
                   = link_to image_path(comment_id: comment.id),
                       class: 'delete_icons',
                       method: :delete do

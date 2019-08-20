@@ -21,10 +21,7 @@
     .five.wide.column
       .ui.card
         .image
-          - if @post.user.avatar?
-            = image_tag @post.user.avatar.url
-          - else
-            = image_tag @post.user.gravatar_url
+          = render 'users/avatar', type: @post.user
         .content
           = link_to @post.user.name, user_path(@post.user.id), class: :header
 
