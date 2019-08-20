@@ -2,6 +2,11 @@ class CommentsController < ApplicationController
   before_action :user_is_logged_in, only: [:create, :update, :destroy]
   before_action :user_is_confirmed, only: [:create, :update, :destroy]
   before_action :set_comment, only: [:update, :destroy]
+
+  # after_action :create, (CommentBroadcastJob.perform_later self)
+  after_commit CommentBroadcastJob.perform_later self, :on => :create
+
+
   def create
     @comment = current_user.comments.create(comment_params)
     if @comment.save

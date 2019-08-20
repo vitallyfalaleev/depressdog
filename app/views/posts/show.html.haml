@@ -32,8 +32,7 @@
   - else
     .ui.warning.message
       LogIn to leave a comment.
-  .ui.threaded.comments
-
+  .ui.threaded.comments#comments
     -if @post.comments.any?
       = render @post.comments.reverse
 

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :user_is_logged_in, only: [:edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :user_is_logged_in, :owner, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
