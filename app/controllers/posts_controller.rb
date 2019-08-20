@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :user_is_logged_in,
                 only: [:new, :edit, :update, :destroy]
+  before_action :user_is_confirmed,
+                only: [:new, :edit, :update, :destroy]
   before_action :set_post,
                 only: [:show, :edit, :update, :destroy]
 
@@ -28,16 +30,22 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     respond_to do |format|
-      if @post.save && params[:images]['image'].size <= 5
-        p '*'*100
-        p params[:images]['image'].size
-        params[:images]['image'].each do |i|
-          @image = @post.images.create(image: i, post_id: @post.id,
-                                       user_id: @post.user_id)
+      if params[:data].nil?
+        if @post.save
+          format.html {redirect_to @post, notice: 'Post created!'}
+        else
+          format.html {render action: 'new'}
         end
-        format.html {redirect_to @post, notice: 'Post created!'}
       else
-        format.html {render action: 'new'}
+        if @post.save && params[:images]['image'].size <= 5
+          params[:images]['image'].each do |i|
+            @image = @post.images.create(image: i, post_id: @post.id,
+                                         user_id: @post.user_id)
+          end
+          format.html {redirect_to @post, notice: 'Post created!'}
+        else
+          format.html {render action: 'new'}
+        end
       end
     end
   end

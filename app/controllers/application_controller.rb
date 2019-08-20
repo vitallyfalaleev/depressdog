@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def user_is_confirmed
+    if !current_user.email_confirmed?
+      redirect_to user_path(current_user.id), {notice: 'Please confirm your email'}
+    end
+  end
+
 
 
 end
