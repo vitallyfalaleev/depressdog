@@ -4,8 +4,7 @@
       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
       %ul
         - @post.errors.full_messages.each do |message|
-          %li= message
-
+          %li= messages
   .field
     = f.label :title
     = f.text_field :title, maxlength: "20"
