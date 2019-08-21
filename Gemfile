@@ -56,6 +56,9 @@ gem 'omniauth-linkedin-oauth2'
 gem 'letter_opener', group: :development
 gem 'mail'
 
+gem 'will_paginate', '~> 3.1.0'
+gem "will_paginate_semantic_ui"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

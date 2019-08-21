@@ -11,3 +11,5 @@
         %i.icon.search
 
   =render @posts
+  = will_paginate @collection,
+  renderer: WillPaginateSemanticUi::ActionView::Renderer

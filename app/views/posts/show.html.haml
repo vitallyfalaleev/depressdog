@@ -35,4 +35,3 @@
   #comments.ui.threaded.comments{"data-parrent_id" => @post.id}
     -if @post.comments.any?
       = render @post.comments.reverse
-      -#= render 'comments/comment', type: @post.comments
