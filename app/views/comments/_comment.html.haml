@@ -44,5 +44,5 @@
         .content
           = render 'comments/form', object: comment
   - if comment.comments.any?
-    .comments
+    #comments.comments{"data-parrent_id" => comment.id}
       = render comment.comments

@@ -1,0 +1,25 @@
+.comment
+  %a.avatar
+    = render 'users/avatar', type: comment.user
+  .content
+    = link_to comment.user.name, user_path(comment.user.id), class: 'author'
+    .metadata
+      %span.date= comment.created_at.to_s(:ru_datetime)
+    .text
+      = comment.body
+    - if comment.image?
+      = image_tag comment.image.url, class: 'ui midle image'
+    .actions
+      .ui.accordion
+        .likable{'data-likable-id': comment.id,
+        'data-likable-type': 'Comment'}
+          = render 'likes/likes', object: comment
+
+        %a.title.reply
+          %i.dropdown.icon
+          Reply
+        .content
+          = render 'comments/form', object: comment
+  - if comment.comments.any?
+    #comments.comments{"data-parrent_id" => comment.id}
+      = render comment.comments
