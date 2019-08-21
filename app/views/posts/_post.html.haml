@@ -3,7 +3,6 @@
     .header= link_to post.title, post_path(post.id)
     .description= post.body[0, 100]
   .extra.content
-    = post.comments.all.count
     %span.left.floated.like.likable{'data-likable-id': post.id,
         'data-likable-type': 'Post'}
       = render 'likes/likes', object: post

@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :user_is_logged_in,
-                only: [:new, :edit, :update, :destroy]
+                only: %i[new edit update destroy]
   before_action :user_is_confirmed,
-                only: [:new, :edit, :update, :destroy]
+                only: %i[new edit update destroy]
   before_action :set_post,
-                only: [:show, :edit, :update, :destroy]
+                only: %i[show edit update destroy]
 
   # GET /posts
   def index
-    if params[:search]
-      @posts = Post.search(params[:search]).order("created_at DESC")
-    else
-      @posts = Post.order('created_at DESC')
-    end
+    @posts = if params[:search]
+               Post.search(params[:search]).order('created_at DESC')
+             else
+               Post.order('created_at DESC')
+             end
   end
 
   # GET /users/:id
@@ -36,9 +38,9 @@ class PostsController < ApplicationController
     respond_to do |format|
       if params[:data].nil?
         if @post.save
-          format.html {redirect_to @post, notice: 'Post created!'}
+          format.html { redirect_to @post, notice: 'Post created!' }
         else
-          format.html {render action: 'new'}
+          format.html { render action: 'new' }
         end
       else
         if @post.save && params[:images]['image'].size <= 5
@@ -46,9 +48,9 @@ class PostsController < ApplicationController
             @image = @post.images.create(image: i, post_id: @post.id,
                                          user_id: @post.user_id)
           end
-          format.html {redirect_to @post, notice: 'Post created!'}
+          format.html { redirect_to @post, notice: 'Post created!' }
         else
-          format.html {render action: 'new'}
+          format.html { render action: 'new' }
         end
       end
     end
@@ -60,27 +62,30 @@ class PostsController < ApplicationController
     @images = @post.images
     respond_to do |format|
       if params[:data].nil?
-        if  @post.update(post_params)
-          format.html {redirect_to @post, notice: 'Post updated!'}
+        if @post.update(post_params)
+          format.html { redirect_to @post, notice: 'Post updated!' }
         else
-          format.html {redirect_to edit_post_path(@post),
-                                     notice: 'Someting wrong!'}
+          format.html do
+            redirect_to edit_post_path(@post),
+                        notice: 'Someting wrong!'
+          end
         end
       else
         if  @post.update(post_params) && params[:data]['image'].size <= 5 &&
-            @post.images.count <=5 && @post.images.count +
-            params[:data]['image'].size <= 5
+            @post.images.count <= 5 && @post.images.count +
+                                       params[:data]['image'].size <= 5
           params[:data]['image'].each do |i|
             @image = @post.images.create(image: i, post_id: @post.id,
                                          user_id: @post.user_id)
           end
-          format.html {redirect_to @post, notice: 'Post updated!'}
+          format.html { redirect_to @post, notice: 'Post updated!' }
         else
-          format.html {redirect_to edit_post_path(@post),
-                                   notice: 'Someting wrong!'}
+          format.html do
+            redirect_to edit_post_path(@post),
+                        notice: 'Someting wrong!'
+          end
         end
       end
-
     end
   end
 
@@ -91,11 +96,12 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    def post_params
-      params.require(:post).permit(:title, :body, data:[:post_id, :image])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body, data: %i[post_id image])
+  end
 end

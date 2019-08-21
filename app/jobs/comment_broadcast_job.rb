@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentBroadcastJob < ApplicationJob
   queue_as :default
 
@@ -7,8 +9,9 @@ class CommentBroadcastJob < ApplicationJob
   end
 
   private
+
   def render_comment(comment)
     ApplicationController.renderer.render(partial: 'comments/comment',
-                                          locals: {type: comment})
+                                          locals: { type: comment })
   end
 end

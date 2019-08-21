@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :user_is_logged_in, :owner, only: [:edit, :update, :destroy]
+  before_action :set_user, only: %i[show edit update destroy]
+  before_action :user_is_logged_in, :owner, only: %i[edit update destroy]
 
   # GET /users
   # GET /users.json
@@ -63,31 +65,31 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
-
   end
 
   def confirm_email
     user = User.find_by_confirm_token(params[:id])
     if user
       user.email_activate
-      flash[:success] = "Your email has been confirmed."
+      flash[:success] = 'Your email has been confirmed.'
       redirect_to root_path
     else
-      flash[:error] = "Sorry. User does not exist"
+      flash[:error] = 'Sorry. User does not exist'
       redirect_to root_url
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation, :avatar,
-                                   :remove_avatar)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation, :avatar,
+                                 :remove_avatar)
+  end
 end

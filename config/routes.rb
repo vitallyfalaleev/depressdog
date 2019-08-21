@@ -1,6 +1,7 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
-  resources :sessions, only: [:new, :create, :destroy]
+Rails.application.routes.draw do
+  resources :sessions, only: %i[new create destroy]
 
   resources :users do
     member do
@@ -9,11 +10,11 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :images, :only => [:create, :destroy]
+    resources :images, only: %i[create destroy]
   end
 
-  resources :comments, :only => [:create, :update, :destroy]
-  resources :likes, :only => [:create, :destroy]
+  resources :comments, only: %i[create update destroy]
+  resources :likes, only: %i[create destroy]
 
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'

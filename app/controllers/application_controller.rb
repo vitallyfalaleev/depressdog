@@ -1,16 +1,14 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def owner
-    unless current_user.id == @user.id
-      redirect_to user_path(@user.id)
-    end
+    redirect_to user_path(@user.id) unless current_user.id == @user.id
   end
 
   def user_is_logged_in
-    unless session[:user_id]
-      redirect_to login_path
-    end
+    redirect_to login_path unless session[:user_id]
   end
 
   def current_user
@@ -22,8 +20,8 @@ class ApplicationController < ActionController::Base
   end
 
   def user_is_confirmed
-    if !current_user.email_confirmed?
-      redirect_to user_path(current_user.id), {notice: 'Please confirm your email'}
+    unless current_user.email_confirmed?
+      redirect_to user_path(current_user.id), notice: 'Please confirm your email'
     end
   end
 end

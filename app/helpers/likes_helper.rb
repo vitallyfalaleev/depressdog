@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LikesHelper
   def likes_user(type)
     type.likes.where("user_id = #{current_user.id}").any?

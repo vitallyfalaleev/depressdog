@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 class Like < ApplicationRecord
   belongs_to :user
-  belongs_to :likable, :polymorphic => true
+  belongs_to :likable, polymorphic: true
 
-  validates :user_id, uniqueness: { scope: [:likable_type, :likable_id],
+  validates :user_id, uniqueness: { scope: %i[likable_type likable_id],
                                     message: 'Already liked' }
   def like_ident
-    if self.likable.class == Post
-      self.likable.id
+    if likable.class == Post
+      likable.id
     else
-      self.likable.post_ident
+      likable.post_ident
     end
   end
 end

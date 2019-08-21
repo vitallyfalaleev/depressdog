@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
-  before_action :user_is_logged_in, only: [:create, :update, :destroy]
-  before_action :user_is_confirmed, only: [:create, :update, :destroy]
-  before_action :set_comment, only: [:update, :destroy]
+  before_action :user_is_logged_in, only: %i[create update destroy]
+  before_action :user_is_confirmed, only: %i[create update destroy]
+  before_action :set_comment, only: %i[update destroy]
 
   def create
     @comment = current_user.comments.create(comment_params)
@@ -21,18 +23,22 @@ class CommentsController < ApplicationController
       render post_path(@comment.post_ident)
     end
   end
+
   def destroy
     @comment.destroy
     CommentBroadcastJob.perform_later
     redirect_to post_path(@comment.post_ident)
   end
+
   def destroy_image
     @comment = Comment.find(params[:comment_id])
     @comment.image.remove!
 
     redirect_to post_path(@comment.post_ident)
   end
+
   private
+
   def set_comment
     @comment = Comment.find(params[:id])
   end
