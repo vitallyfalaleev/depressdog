@@ -6,8 +6,16 @@ App.comment = App.cable.subscriptions.create "CommentChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    $('#comments[data-parrent_id="' + data.parrent_id + '"]')
-      .prepend(data.div)
+    el = $('#comments[data-parrent_id="' + data.parrent_id + '"][data-parrent_type="' + data.parrent_type + '"]')
+    console.log('1111--------')
+    console.log(el)
+    console.log(data)
+#    console.log(data.div)
+    if data.parrent_type == "Post"
+        el.prepend(data.div)
+    else
+        el.append(data.div)
+
     $('#comments[data-parrent_id="' + data.parrent_id + '"] .accordion')
       .accordion({
          selector: {

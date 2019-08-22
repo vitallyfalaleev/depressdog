@@ -8,10 +8,11 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.create(comment_params)
     if @comment.save
-      ActionCable.server.broadcast "comment_#{params[:id]}",
+      ActionCable.server.broadcast "comment_channel",
                                    div: (render partial: 'comments/comment',
                                                 locals: {comment: @comment}),
-                                   parrent_id: @comment.commentable_id
+                                   parrent_id: @comment.commentable_id,
+                                   parrent_type: @comment.commentable_type
     else
       redirect_to post_path(@comment.post_ident), notice: 'Cant be blank'
     end
@@ -19,7 +20,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      ActionCable.server.broadcast 'comment_channel',
+      ActionCable.server.broadcast "comment_#{params[:id]}",
                                    div: (render partial: 'comments/comment',
                                                 locals: {comment: @comment})
     else

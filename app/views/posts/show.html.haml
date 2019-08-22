@@ -32,6 +32,6 @@
   - else
     .ui.warning.message
       LogIn to leave a comment.
-  #comments.ui.threaded.comments{"data-parrent_id" => @post.id}
+  #comments.ui.threaded.comments{"data-parrent_id" => @post.id, "data-parrent_type" => 'Post'}
     -if @post.comments.any?
       = render @post.comments.reverse

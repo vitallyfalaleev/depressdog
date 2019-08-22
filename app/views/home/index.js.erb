@@ -1,0 +1,13 @@
+$('#posts_home').append('<%= j render @posts %>');
+el = $('.pagination')
+<% if @posts.next_page %>
+  el.replaceWith('<%= j will_paginate @posts,
+        renderer: WillPaginateSemanticUi::ActionView::Renderer %>')
+  $('.ui.active.centered.inline.loader').remove();
+
+<% else %>
+  $(window).off('scroll');
+  el.remove();
+  $('.ui.active.centered.inline.loader').remove();
+
+<% end %>
