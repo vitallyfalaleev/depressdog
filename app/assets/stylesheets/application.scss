@@ -23,7 +23,9 @@
   }
 }
 @import "semantic-ui";
-
+.like{
+  display: flex;
+}
 .likes{
   display: block;
   height: 20px;

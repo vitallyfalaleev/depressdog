@@ -8,15 +8,6 @@ class PostsController < ApplicationController
   before_action :set_post,
                 only: %i[show edit update destroy]
 
-  # GET /posts
-  def index
-    @posts = if params[:search]
-               Post.search(params[:search]).paginate(page: params[:page], per_page: 5).order('created_at DESC')
-             else
-               Post.paginate(page: params[:page], per_page: 5).order('created_at DESC')
-             end
-  end
-
   # GET /users/:id
   def show
     @images = @post.images.all

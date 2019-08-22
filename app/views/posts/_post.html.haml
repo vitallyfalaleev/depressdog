@@ -3,7 +3,12 @@
     .header= link_to post.title, post_path(post.id)
     .description= post.body[0, 100]
   .extra.content
-    %span.left.floated.like.likable{'data-likable-id': post.id,
+    %span.left.floated.like
+      .likable{'data-likable-id': post.id,
         'data-likable-type': 'Post'}
-      = render 'likes/likes', object: post
+        = render 'likes/likes', object: post
+      .comments_count
+        = post.comments.count
+        %i.comment.outline.icon
+
     %span.right.floated= post.created_at.to_s(:ru_datetime)
