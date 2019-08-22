@@ -1,10 +1,18 @@
 .ui.container.grid
   .eleven.wide.column#posts_home
     = render @posts
-    #infinite_scroll
+    #infinite_scroll{style: 'display:none'}
       = will_paginate @posts,
         renderer: WillPaginateSemanticUi::ActionView::Renderer
   .five.wide.column
+    .ui.piled.segment
+      .ui.header Search
+      = form_for posts_path, :method => "get", html: {id: "search-form", class: "ui form"} do |f|
+        .field
+          = text_field_tag :search, params[:search], placeholder: "Search"
+        .ui.action
+          = f.button 'search', class: 'ui fluid blue button'
+
     .ui.piled.segment
       .ui.header Last registered
       .ui.divided.middle.aligned.selection.list

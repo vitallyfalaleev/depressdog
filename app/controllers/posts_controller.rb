@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = if params[:search]
-               Post.search(params[:search]).order('created_at DESC')
+               Post.search(params[:search]).paginate(page: params[:page], per_page: 5).order('created_at DESC')
              else
                Post.paginate(page: params[:page], per_page: 5).order('created_at DESC')
              end

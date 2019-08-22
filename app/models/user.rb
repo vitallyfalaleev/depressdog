@@ -28,6 +28,9 @@ class User < ApplicationRecord
     save!(validate: false)
   end
 
+  def self.search(search)
+    where('title ILIKE ?', "%#{search}%")
+  end
   private
 
   def confirmation_token

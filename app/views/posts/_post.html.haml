@@ -1,8 +1,6 @@
 .ui.card.fluid
   .content
-    .header
-      = post.id
-      = link_to post.title, post_path(post.id)
+    .header= link_to post.title, post_path(post.id)
     .description= post.body[0, 100]
   .extra.content
     %span.left.floated.like.likable{'data-likable-id': post.id,
