@@ -1,19 +1,25 @@
 .ui.container
-  %h1 Listing users
+  .ui.clearing
+    .ui.left.floated.header
+      Listing users.
+    .ui.right.floated.header
+      = @users.count
+      in total.
+
 
   %table.ui.celled.table
     %thead
       %tr
         %th Name
         %th Email
-        %th
-          Users:
-          = @users.count
+        %th Our clients since
     %tbody
       - @users.each do |user|
         %tr
           %td= link_to user.name, user
           %td= user.email
-          %td= user.created_at
-  = will_paginate @collection,
-  renderer: WillPaginateSemanticUi::ActionView::Renderer
+          %td= user.created_at.strftime("%d/%m/%Y")
+.ui.bottom.fixed.menu
+  .ui.container
+    = will_paginate @collection,
+    renderer: WillPaginateSemanticUi::ActionView::Renderer, class: 'inverted'
