@@ -8,11 +8,12 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.create(comment_params)
     if @comment.save
-      ActionCable.server.broadcast "comment_channel",
+      ActionCable.server.broadcast "comment_#{@comment.post_ident}",
                                    div: (render partial: 'comments/comment',
-                                                locals: {comment: @comment}),
+                                                locals: { comment: @comment }),
                                    parrent_id: @comment.commentable_id,
-                                   parrent_type: @comment.commentable_type
+                                   parrent_type: @comment.commentable_type,
+                                   reaction: 'create'
     else
       redirect_to post_path(@comment.post_ident), notice: 'Cant be blank'
     end
@@ -20,17 +21,23 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      ActionCable.server.broadcast "comment_#{params[:id]}",
+      ActionCable.server.broadcast "comment_#{@comment.post_ident}",
                                    div: (render partial: 'comments/comment',
-                                                locals: {comment: @comment})
+                                                locals: { comment: @comment }),
+                                   parrent_id: @comment.commentable_id,
+                                   parrent_type: @comment.commentable_type,
+                                   reaction: 'update'
     else
-      render post_path(@comment.post_ident)
+      redirect_to post_path(@comment.post_ident)
     end
   end
 
   def destroy
+    ActionCable.server.broadcast "comment_#{@comment.post_ident}",
+                                 parrent_id: @comment.id,
+                                 reaction: 'delete'
     @comment.destroy
-    redirect_to post_path(@comment.post_ident)
+    render json: {succress: true}
   end
 
   def destroy_image

@@ -39,6 +39,24 @@
     cursor: pointer;
   }
 }
+.rating.likable{
+  .likes{
+    display: block;
+    height: auto;
+    min-width: 35px;
+    &[type="submit"]{
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 1em;
+    }
+    &:hover{
+      color: #4183C4;
+      cursor: pointer;
+    }
+  }
+}
+
 .delete_image{
   position: relative;
   & .delete_icons{
@@ -46,4 +64,7 @@
     top: -10px;
     right: -10px;
   }
+}
+.hide{
+  display: none;
 }

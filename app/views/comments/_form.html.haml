@@ -6,7 +6,7 @@
   = f.hidden_field :commentable_type, value:  object.class.to_s
   = f.hidden_field :commentable_id, value: object.id
   .field
-    = f.text_area :body, minlength: "3", maxlength: "500"
+    = f.text_area :body, minlength: "3", maxlength: "500", rows: 2
   .field
     = f.file_field :image
   .ui.buttons

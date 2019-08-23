@@ -74,6 +74,7 @@ group :development do
   gem 'guard-livereload', '~> 2.5', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'meta_request'
 end
 
 group :test do

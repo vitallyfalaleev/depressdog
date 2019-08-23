@@ -1,48 +1,50 @@
-.comment
+.comment{"data-parrent_id" => comment.id, "data-parrent_type" => 'Comment'}
   %a.avatar
     = render 'users/avatar', type: comment.user
   .content
     = link_to comment.user.name, user_path(comment.user.id), class: 'author'
     .metadata
-      %span.date= comment.created_at.to_s(:ru_datetime)
-    .text
+      .date= comment.created_at.to_s(:ru_datetime)
+      .rating.likable{'data-likable-id': comment.id,
+          'data-likable-type': 'Comment'}
+        = render 'likes/likes', object: comment
+    .text.active
       = comment.body
-    - if comment.image?
-      = image_tag comment.image.url, class: 'ui midle image'
-    .actions
-      .ui.accordion
-        .likable{'data-likable-id': comment.id,
-        'data-likable-type': 'Comment'}
-          = render 'likes/likes', object: comment
-
-        -if owner(comment.user_id)
-          = link_to 'Destroy', comment,
-                        method: :delete,data: { confirm: 'Are you sure?' },
-                        class: 'reply'
-          %a.title.reply
-            %i.dropdown.icon
-            Edit
-          .content
-            = form_for comment,
-              html: {class: 'ui reply form transition hidden'} do |f|
-              .field
-                = f.text_area :body, maxlength: "500", minlength: 1
-                .field
-                  = image_tag comment.image.url, class: 'ui big image' if comment.image?
-                  = link_to image_path(comment_id: comment.id),
+      - if comment.image?
+        = image_tag comment.image.url, class: 'ui midle image'
+    -if  current_user && current_user.id == comment.user_id
+      = form_with model: comment,
+        multipart: true,
+        html: {class: 'ui form hide'} do |f|
+        .field
+          = f.text_area :body, maxlength: "500", minlength: 3, rows: 2
+        .field
+          - if comment.image?
+            = image_tag comment.image.url, class: 'ui big image' if comment.image?
+            = link_to image_path(comment_id: comment.id),
                       class: 'delete_icons',
                       method: :delete do
-                    %i.top.left.corner.red.close.link.icon
-              .field
-                = f.file_field :image
-              .ui.buttons
-                = f.submit 'Save', class: 'ui green button'
-                = f.button 'reset',type: :reset, class: 'ui orange button'
+              %i.top.left.corner.red.close.link.icon
+        .field
+          = f.file_field :image
+        .ui.buttons
+          = f.submit 'Save', class: 'ui green button'
+          = f.button 'reset',type: :reset, class: 'ui orange button'
+    .actions
+      .ui.accordion
+        -if  current_user && current_user.id == comment.user_id
+          = link_to 'Destroy', comment,
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' },
+                        class: 'reply',
+                        remote: true
+          %a.reply.edit{"data-comment_id" => comment.id}
+            Edit
         %a.title.reply
           %i.dropdown.icon
           Reply
         .content
           = render 'comments/form', object: comment
   - if comment.comments.any?
-    #comments.comments{"data-parrent_id" => comment.id, "data-parrent_type" => 'Comment'}
+    .comments
       = render comment.comments

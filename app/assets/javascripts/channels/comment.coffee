@@ -1,27 +1,32 @@
-App.comment = App.cable.subscriptions.create "CommentChannel",
-  connected: ->
-    # Called when the subscription is ready for use on the server
-
-  disconnected: ->
-    # Called when the subscription has been terminated by the server
-
-  received: (data) ->
-    el = $('#comments[data-parrent_id="' + data.parrent_id + '"][data-parrent_type="' + data.parrent_type + '"]')
-    console.log('1111--------')
-    console.log(el)
-    console.log(data)
-#    console.log(data.div)
-    if data.parrent_type == "Post"
-        el.prepend(data.div)
-    else
-        el.append(data.div)
-
-    $('#comments[data-parrent_id="' + data.parrent_id + '"] .accordion')
-      .accordion({
-         selector: {
+$(document).on 'turbolinks:load', ->
+  App.comments = App.cable.subscriptions.create ({
+    channel: "CommentChannel",
+    id: $('#comments[data-parrent_type="Post"]').data('parrent_id')
+  }),
+   connected: ->
+     console.log('log')
+   disconnected: ->
+   received: (data) ->
+    console.log(data.reaction)
+    if data.reaction == 'create'
+      el = $('[data-parrent_id="' + data.parrent_id + '"][data-parrent_type="' + data.parrent_type + '"]')
+      if data.parrent_type == "Post"
+        $('#comments[data-parrent_id="' + data.parrent_id + '"][data-parrent_type="' + data.parrent_type + '"]').prepend(data.div)
+      else if data.parrent_type == "Comment"
+        el.append("<div class='comments'>#{data.div}</div>")
+        $('.title.reply').removeClass('active')
+        $('[data-parrent_id="' + data.parrent_id + '"][data-parrent_type="' + data.parrent_type + '"] .content.active').removeClass('active')
+      $('[data-parrent_id="' + data.parrent_id + '"] .accordion')
+        .accordion({
+        selector: {
           trigger: '.reply'
         }
       });
-    console.log(data.parrent_id)
-    console.log($('#comments[data-parrent_id="' + data.parrent_id + '"]'))
-
+      $('.ui.reply.form textarea').val('')
+      $('.ui.reply.form input[type="file"]').val('')
+    else if data.reaction == 'delete'
+      $('[data-parrent_id="' + data.parrent_id + '"][data-parrent_type="Comment"]').remove()
+    else if data.reaction == 'update'
+      console.log('update')
+    else
+      console.log('else')
