@@ -17,7 +17,7 @@
       = i.label :images
       = i.file_field :images,
         multiple: true,
-        name: "images[image][]", max: 5
+        name: "data[image][]", max: 5
   .ui.buttons
     = f.submit 'Save', class: 'ui green button'
     = f.button 'reset',type: :reset, class: 'ui orange button'

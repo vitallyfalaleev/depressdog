@@ -1,8 +1,6 @@
 = form_with model: Comment.new(commentable: object),
       multipart: true,
       html: {class: 'ui reply form'} do |f|
-  - if notice
-    .ui.visible.negative.message= notice
   = f.hidden_field :commentable_type, value:  object.class.to_s
   = f.hidden_field :commentable_id, value: object.id
   .field

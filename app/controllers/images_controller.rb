@@ -17,9 +17,10 @@ class ImagesController < ApplicationController
     @image.destroy
     respond_to do |format|
       format.html do
-        redirect_to edit_post_url(id: @image.post), notice: 'Post
-       attachment was
-      successfully destroyed.'
+        render plain: 1
+        # redirect_to edit_post_url(id: @image.post), notice: 'Post
+      #  attachment was
+      # successfully destroyed.'
       end
       format.json { head :no_content }
     end

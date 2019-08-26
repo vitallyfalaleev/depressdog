@@ -28,5 +28,12 @@ $(document).on 'turbolinks:load', ->
       $('[data-parrent_id="' + data.parrent_id + '"][data-parrent_type="Comment"]').remove()
     else if data.reaction == 'update'
       console.log('update')
+      console.log(data.image.url)
+      $('[data-comment_id="' + data.parrent_id + '"] .content .text .text_body').text(data.comment)
+      $('[data-comment_id="' + data.parrent_id + '"] .text .image_body .image').attr("src", data.image.url)
+      $('[data-comment_id="' + data.parrent_id + '"] .text.hide').removeClass('hide').addClass('active')
+      $('[data-comment_id="' + data.parrent_id + '"] .form.active').removeClass('active').addClass('hide')
+    else if data.reaction == 'delete_image'
+      $('[data-parrent_id="' + data.parrent_id + '"][data-parrent_type="Comment"] .field.image').html('')
     else
       console.log('else')

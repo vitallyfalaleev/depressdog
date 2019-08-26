@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = current_user.posts.new(post_params)
-
+    
     respond_to do |format|
       if params[:data].nil?
         if @post.save
@@ -34,8 +34,8 @@ class PostsController < ApplicationController
           format.html { render action: 'new' }
         end
       else
-        if @post.save && params[:images]['image'].size <= 5
-          params[:images]['image'].each do |i|
+        if @post.save && params[:data]['image'].size <= 5
+          params[:data]['image'].each do |i|
             @image = @post.images.create(image: i, post_id: @post.id,
                                          user_id: @post.user_id)
           end
@@ -93,6 +93,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, data: %i[post_id image])
+    params.require(:post).permit(:title, :body, data: [:post_id, :image])
   end
 end

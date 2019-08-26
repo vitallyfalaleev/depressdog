@@ -11,10 +11,11 @@
                         class: 'ui red button'
           %h3.ui.header= @post.title
           %p= @post.body
-        .ui.segment
-          .ui.small.images
-            - @images.each do |img|
-              = image_tag img.image.url, class: 'ui image'
+        -if @images.any?  
+          .ui.segment
+            .ui.small.images
+              - @images.each do |img|
+                = image_tag img.image.url, class: 'ui image'
         .ui.segment.likable{'data-likable-id': @post.id,
         'data-likable-type': 'Post'}
           = render 'likes/likes', object: @post
@@ -27,11 +28,11 @@
 
 
   %h3.ui.dividing.header Comments
-  - if current_user
+  - if current_user && current_user.email_confirmed?
     = render 'comments/form', object: @post
   - else
     .ui.warning.message
-      LogIn to leave a comment.
+      LogIn or confirm your email to leave a comment.
   #comments.ui.threaded.comments{"data-parrent_id" => @post.id, "data-parrent_type" => 'Post'}
     -if @post.comments.any?
       = render @post.comments.reverse

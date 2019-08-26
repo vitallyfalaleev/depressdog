@@ -10,6 +10,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render 'layouts/header'
+    %div{:style => "display:none"}
+      = flash.now[:notice] = params[:flash_notice]
     - if notice
       .ui.message.transition#notice
         %i.close.icon

@@ -3,7 +3,7 @@
 class CommentsController < ApplicationController
   before_action :user_is_logged_in, only: %i[create update destroy]
   before_action :user_is_confirmed, only: %i[create update destroy]
-  before_action :set_comment, only: %i[update destroy]
+  before_action :set_comment, only: %i[update destroy destroy_image]
 
   def create
     @comment = current_user.comments.create(comment_params)
@@ -22,9 +22,9 @@ class CommentsController < ApplicationController
   def update
     if @comment.update(comment_params)
       ActionCable.server.broadcast "comment_#{@comment.post_ident}",
-                                   div: (render partial: 'comments/comment',
-                                                locals: { comment: @comment }),
-                                   parrent_id: @comment.commentable_id,
+                                   comment: @comment.body,
+                                   image: @comment.image,
+                                   parrent_id: @comment.id,
                                    parrent_type: @comment.commentable_type,
                                    reaction: 'update'
     else
@@ -41,10 +41,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy_image
-    @comment = Comment.find(params[:comment_id])
     @comment.image.remove!
-
-    redirect_to post_path(@comment.post_ident)
+    ActionCable.server.broadcast "comment_#{@comment.post_ident}",
+                                  div: (render partial: 'comments/comment',
+                                              locals: { comment: @comment }),
+                                  parrent_id: @comment.id,
+                                  parrent_type: @comment.commentable_type,
+                                  reaction: 'delete_image'
   end
 
   private

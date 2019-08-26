@@ -2,7 +2,6 @@
 
 class ApplicationController < ActionController::Base
   helper_method :current_user
-
   def owner
     redirect_to user_path(@user.id) unless current_user.id == @user.id
   end
@@ -21,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def user_is_confirmed
     unless current_user.email_confirmed?
-      redirect_to user_path(current_user.id), notice: 'Please confirm your email'
+      flash.now[:notice] = 'Please confirm your email!'
     end
   end
 end
