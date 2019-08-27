@@ -31,4 +31,10 @@ $(document).on('turbolinks:load', function () {
                 trigger: '.reply'
             }
         });
+    $('.ui.sidebar')
+        .sidebar({
+            context: $('.pushable')
+        })
+        .sidebar('attach events', '.mobile_sidebar.item')
+    ;
 });

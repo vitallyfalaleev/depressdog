@@ -6,7 +6,6 @@
       = @users.count
       in total.
 
-
   %table.ui.celled.table
     %thead
       %tr
@@ -19,7 +18,10 @@
           %td= link_to user.name, user
           %td= user.email
           %td= user.created_at.strftime("%d/%m/%Y")
-.ui.bottom.fixed.menu
+  .user_table
+    = will_paginate @collection,
+    renderer: WillPaginateSemanticUi::ActionView::Renderer, class: 'inverted'
+.ui.bottom.fixed.menu.user_menu
   .ui.container
     = will_paginate @collection,
     renderer: WillPaginateSemanticUi::ActionView::Renderer, class: 'inverted'

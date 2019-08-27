@@ -1,13 +1,13 @@
 .ui.container
-  .ui.grid
+  .ui.grid.stackable
     .four.wide.column
       .ui.medium.image
         = render 'avatar', type: @user
-      - if owner(@user.id)
-        .ui.buttons.fluid
-          = link_to 'Edit', edit_user_path(@user),
-          class: 'ui green button'
-          = link_to 'Destroy', @user, method: :delete,
+        - if owner(@user.id)
+          .ui.buttons.fluid
+            = link_to 'Edit', edit_user_path(@user),
+            class: 'ui green button'
+            = link_to 'Destroy', @user, method: :delete,
           data: { confirm: 'Are you sure?' }, class: 'ui red button'
     .twelve.wide.column
       %h5 Name:
@@ -16,19 +16,21 @@
       %p= @user.email
 
 %br/
-.ui.container.cards.two
-  - @user.posts.each do |p|
-    .card.fluid
-      .content
-        .header= link_to p.title, post_path(p.id)
-        .description= p.body[0, 100]
-      .extra.content
-        %span.right.floated= p.created_at.to_s(:ru_datetime)
-      - if owner(p.user_id)
+.ui.container.grid
+  .row
+    %h3.header Posts
+  .ui.row.cards.two.stackable
+    - @user.posts.order('created_at DESC').limit(10).each do |p|
+      .card.fluid
+        .content
+          .header= link_to p.title, post_path(p.id)
         .extra.content
-          %span.left.floated
-            = link_to 'Edit', edit_post_path(p),
-            class: 'ui green button'
-            = link_to 'Destroy', p, method: :delete,
-            data: { confirm: 'Are you sure?' },
-            class: 'ui red button'
+          %span.right.floated= p.created_at.to_s(:ru_datetime)
+        - if owner(p.user_id)
+          .extra.content
+            %span.left.floated
+              = link_to 'Edit', edit_post_path(p),
+              class: 'ui green button'
+              = link_to 'Destroy', p, method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: 'ui red button'

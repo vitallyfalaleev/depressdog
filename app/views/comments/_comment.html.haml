@@ -11,8 +11,8 @@
     .text.active
       .text_body
         = comment.body
-      - if comment.image?
-        .image_body
+      .image_body
+        - if comment.image?
           = image_tag comment.image.url, class: 'ui midle image'
     -if  current_user && current_user.id == comment.user_id
       = form_with model: comment,

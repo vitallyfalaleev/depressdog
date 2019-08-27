@@ -8,13 +8,27 @@
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    = render 'layouts/header'
-    %div{:style => "display:none"}
-      = flash.now[:notice] = params[:flash_notice]
-    - if notice
-      .ui.message.transition#notice
-        %i.close.icon
-        .header= notice
+  %body.pushable
+    .ui.vertical.inverted.sidebar.menu.right.uncover
+      - if current_user
+        -if current_user.email_confirmed?
+          = link_to 'New Post', new_post_path, class: 'ui item'
+        - else
+          = link_to 'New Post', {flash_notice: 'Please confirm your email!'},class: 'ui item'
+        = link_to current_user.name, user_path(current_user.id), class: 'item'
+        = link_to 'Logout', logout_path, class: 'item'
+      - else
+        = link_to 'Login', login_path, class: 'ui item'
+        = link_to 'SignUp', signup_path, class: 'ui item'
 
-    = yield
+    .pusher
+      = render 'layouts/header'
+      %div{:style => "display:none"}
+        = flash.now[:notice] = params[:flash_notice]
+      - if notice
+        .ui.message.transition#notice
+          %i.close.icon
+          .header= notice
+
+      = yield
+
