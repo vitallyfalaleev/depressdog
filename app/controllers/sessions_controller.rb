@@ -5,16 +5,17 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
+    p "1" * 1000
     if user&.authenticate(params[:password])
       if user.email_confirmed
         session[:user_id] = user.id
         redirect_to root_url, notice: 'Logged in!'
       else
-        flash.now[:alert] = 'Email not confirmed'
+        flash.now[:notice] = 'Email not confirmed'
         redirect_to login_path
       end
     else
-      flash.now[:alert] = 'Email or password is invalid'
+      flash.now[:notice] = 'Email or password is invalid'
       redirect_to login_path
     end
   end
