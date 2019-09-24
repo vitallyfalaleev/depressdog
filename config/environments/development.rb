@@ -76,6 +76,6 @@ Rails.application.configure do
   }
 
   Rails.application.configure do
-    config.action_cable.url = "ws://fierce-thicket-29629.herokuapp.com/cable"
+    config.action_cable.url = "ws://localhost:3000/cable"
   end
 end
