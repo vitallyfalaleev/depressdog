@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  after_create :notify_pusher, on: :create
   belongs_to :user
   belongs_to :commentable, polymorphic: true
   has_many :comments, as: :commentable, dependent: :destroy
@@ -16,5 +17,8 @@ class Comment < ApplicationRecord
     else
       commentable.post_ident
     end
+  end
+  def notify_pusher
+    Pusher.trigger('comments', 'new', self.as_json)
   end
 end

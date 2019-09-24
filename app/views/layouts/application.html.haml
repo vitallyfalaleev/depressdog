@@ -8,6 +8,20 @@
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %script{:src => "https://js.pusher.com/5.0/pusher.min.js"}
+    :javascript
+      Pusher.logToConsole = true;
+
+      var pusher = new Pusher('58d748b444d5cd6e90ba', {
+        cluster: 'eu',
+        forceTLS: true
+      });
+
+      var channel = pusher.subscribe('my-channel');
+      channel.bind('my-event', function(data) {
+        alert(JSON.stringify(data));
+      });
+
   %body.pushable
     .ui.vertical.inverted.sidebar.menu.right.uncover
       - if current_user
