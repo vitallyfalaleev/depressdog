@@ -46,7 +46,6 @@ gem 'semantic-ui-sass'
 
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 gem 'gravtastic'
 
 gem 'dotenv-rails'
@@ -91,3 +90,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'pusher'
 gem 'faker'
 gem 'sendgrid-ruby'
+gem 'carrierwave', '~> 1.3.1'
+gem 'cloudinary'
