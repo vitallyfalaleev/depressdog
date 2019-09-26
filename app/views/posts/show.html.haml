@@ -11,7 +11,7 @@
                         class: 'ui red button'
           %h3.ui.header= @post.title
           %p= @post.body
-        -if @images.any?  
+        -if @images.any?
           .ui.segment
             .ui.small.images
               - @images.each do |img|

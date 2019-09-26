@@ -2,6 +2,7 @@
 
 class ImagesController < ApplicationController
   before_action :set_image, only: %i[show edit update destroy]
+
   def update
     respond_to do |format|
       if @image.update(image_params)

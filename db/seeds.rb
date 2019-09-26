@@ -15,6 +15,7 @@ require 'faker'
 50.times do
   User.create(name: Faker::Games::Witcher.character,
               email: Faker::Internet.unique.email,
+              image_url: Faker::Avatar.image,
               password: '111111a',
               email_confirmed: true)
 end
@@ -23,8 +24,15 @@ end
               body: Faker::Lorem.paragraph(sentence_count: 3),
               user_id: User.all.order('RANDOM()').first.id)
 end
+100.times do
+  post = Post.all.order('RANDOM()').first
+  Image.create(remote_image_url: Faker::Avatar.image,
+               post_id: post.id,
+               user_id: post.user_id)
+end
 201.times do
   Comment.create(body: Faker::TvShows::DrWho.quote,
+                 remote_image_url: Faker::Avatar.image,
                  commentable_id: Post.all.order('RANDOM()').first.id,
                  commentable_type: 'Post',
                  user_id: User.all.order('RANDOM()').first.id)
