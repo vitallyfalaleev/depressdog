@@ -16,13 +16,11 @@
       = f.label :avatar
       = f.hidden_field :avatar_cache
       = f.file_field :avatar
-      %p= @user.avatar.full_public_id
-      -#= cl_image_tag @user.avatar.full_public_id
-    -#.field
-    -#  - if @user.avatar?
-    -#    = image_tag @user.avatar.url, class: 'ui image small'
-    -#    = f.label :remove_avatar
-    -#    = f.check_box :remove_avatar
+    .field
+      - if @user.avatar?
+        = image_tag @user.avatar.url, class: 'ui image small'
+        = f.label :remove_avatar
+        = f.check_box :remove_avatar
 
     .field
       = f.label :password
