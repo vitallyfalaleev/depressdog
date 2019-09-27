@@ -24,12 +24,6 @@ end
               body: Faker::Lorem.paragraph(sentence_count: 25, supplemental: false, random_sentences_to_add: 4),
               user_id: User.all.order('RANDOM()').first.id)
 end
-5.times do
-  post = Post.all.order('RANDOM()').first
-  Image.create(remote_image_url: Faker::LoremPixel.image,
-               post_id: post.id,
-               user_id: post.user_id)
-end
 20.times do
   Comment.create(body: Faker::TvShows::DrWho.quote,
                  remote_image_url: Faker::LoremPixel.image,
@@ -52,4 +46,10 @@ end
   Like.create(likable_id: Comment.all.order('RANDOM()').first.id,
               likable_type: 'Comment',
               user_id: User.all.order('RANDOM()').first.id)
+end
+5.times do
+  post = Post.all.order('RANDOM()').first
+  Image.create(remote_image_url: Faker::LoremPixel.image,
+               post_id: post.id,
+               user_id: post.user_id)
 end
