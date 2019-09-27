@@ -48,7 +48,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'gravtastic'
 
-gem 'dotenv-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin-oauth2'
