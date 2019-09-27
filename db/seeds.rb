@@ -26,7 +26,7 @@ end
 end
 8.times do
   Comment.create(body: Faker::TvShows::DrWho.quote,
-                 remote_image_url: Faker::LoremPixel.image,
+                 remote_image_url: Faker::Avatar.image,
                  commentable_id: Post.all.order('RANDOM()').first.id,
                  commentable_type: 'Post',
                  user_id: User.all.order('RANDOM()').first.id)
@@ -49,7 +49,7 @@ end
 end
 5.times do
   post = Post.all.order('RANDOM()').first
-  Image.create(remote_image_url: Faker::LoremPixel.image,
+  Image.create(remote_image_url: Faker::Avatar.image,
                post_id: post.id,
                user_id: post.user_id)
 end
