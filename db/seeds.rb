@@ -24,7 +24,7 @@ end
               body: Faker::Lorem.paragraph(sentence_count: 25, supplemental: false, random_sentences_to_add: 4),
               user_id: User.all.order('RANDOM()').first.id)
 end
-20.times do
+8.times do
   Comment.create(body: Faker::TvShows::DrWho.quote,
                  remote_image_url: Faker::LoremPixel.image,
                  commentable_id: Post.all.order('RANDOM()').first.id,
