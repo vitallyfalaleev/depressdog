@@ -19,8 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_is_confirmed
-    unless current_user.email_confirmed?
-      flash.now[:notice] = 'Please confirm your email!'
-    end
+    flash.now[:notice] = 'Please confirm your email!' unless current_user.email_confirmed?
   end
 end

@@ -37,17 +37,17 @@ class CommentsController < ApplicationController
                                  parrent_id: @comment.id,
                                  reaction: 'delete'
     @comment.destroy
-    render json: {succress: true}
+    render json: { succress: true }
   end
 
   def destroy_image
     @comment.image.remove!
     ActionCable.server.broadcast "comment_#{@comment.post_ident}",
-                                  div: (render partial: 'comments/comment',
+                                 div: (render partial: 'comments/comment',
                                               locals: { comment: @comment }),
-                                  parrent_id: @comment.id,
-                                  parrent_type: @comment.commentable_type,
-                                  reaction: 'delete_image'
+                                 parrent_id: @comment.id,
+                                 parrent_type: @comment.commentable_type,
+                                 reaction: 'delete_image'
   end
 
   private

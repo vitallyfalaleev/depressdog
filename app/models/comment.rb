@@ -18,7 +18,8 @@ class Comment < ApplicationRecord
       commentable.post_ident
     end
   end
+
   def notify_pusher
-    Pusher.trigger('comments', 'new', self.as_json)
+    Pusher.trigger('comments', 'new', as_json)
   end
 end

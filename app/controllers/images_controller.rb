@@ -20,8 +20,8 @@ class ImagesController < ApplicationController
       format.html do
         render plain: 1
         # redirect_to edit_post_url(id: @image.post), notice: 'Post
-      #  attachment was
-      # successfully destroyed.'
+        #  attachment was
+        # successfully destroyed.'
       end
       format.json { head :no_content }
     end

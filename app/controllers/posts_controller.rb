@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = current_user.posts.new(post_params)
-    
+
     respond_to do |format|
       if params[:data].nil?
         if @post.save
@@ -93,6 +93,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, data: [:post_id, :image, :remote_image_url])
+    params.require(:post).permit(:title, :body, data: %i[post_id image remote_image_url])
   end
 end
